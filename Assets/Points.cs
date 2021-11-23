@@ -2,43 +2,30 @@ using UnityEngine;
 
 public class Points : MonoBehaviour
 {
-    
-    int highScore = 0;
-    int points = 0;
-    bool endOfGame = false;
-    //int level = some_level_checker;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        Debug.Log("Points: " + points);
-    }
 
     // Update is called once per frame
     void Update()
     {
-        // The following is testing for points
-        if (points == 0)
+        
+        Globals.timer -= 1;
+        if (Globals.timer == 0)
         {
-            points += 100;
+            Globals.endOfGame = true;
+        }
+        
+        // The following is testing for points
+        if (Globals.points == 0)
+        {
+            Globals.points += 100;
         } else
         {
-            points += 25;
+            Globals.points += 25;
         }
         
-        System.Random random = new System.Random();
-        int endIt = random.Next(11);
-        if (endIt == 10)
-        {
-           endOfGame = true;
-        }
-        else
-        {
-            endOfGame = false;
-        }
-        
-        Debug.Log("Points:     " + points);
-        Debug.Log("High Score: " + highScore);
+        //Debug.Log("Points:     " + Globals.points);
+        //Debug.Log("High Score: " + Globals.highScore);
+        //Debug.Log("Level: " + Globals.level);
+        //Debug.Log("Timer: " + Globals.timer);
         
         
         // The following is the planned code to implement
@@ -53,39 +40,46 @@ public class Points : MonoBehaviour
             {
                 if (asteroid.level == 3)
                 {
-                    points += 500;
+                    Globals.points += 500;
                 } 
                 else if (asteroid.level == 2)
                 {
-                    points += 250;
+                    Globals.points += 250;
                 }
                 else if (asteroid.level == 1)
                 {
-                    points += 100
+                    Globals.points += 100
                 }
                 asteroid.level -= 1;
             }
         }
         
-        if (some_level_passed_checker)
-        {
-            int levelBonus = level * 2500;
-            int timeBonus = timer * 10;
-            // Display both         
-            points += (levelBonus + timeBonus)
-        }
-        
-        endOfGame = some_end_of_game_checker
         */
         
-        if (endOfGame)
+        if (Globals.levelPassed)
         {
-            if (points > highScore)
-            {
-                highScore = points;
-            }
-            points = 0;
+            int levelBonus = Globals.level * 2500;
+            int timeBonus = Globals.timer * 10;            
+            // Display both         
+            Globals.points += (levelBonus + timeBonus);
+            Debug.Log(timeBonus);
+            ResetLevel();
+            
         }
         
+        if (Globals.endOfGame)
+        {
+            if (Globals.points > Globals.highScore)
+            {
+                Globals.highScore = Globals.points;
+            }
+            Globals.points = 0;
+        }
+        
+    }
+    
+    void ResetLevel()
+    {
+        Globals.timer = 500;
     }
 }
