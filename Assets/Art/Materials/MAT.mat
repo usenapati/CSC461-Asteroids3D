@@ -80,6 +80,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_5ac0003c4db34011ba3d617df84cd987_Out_0:
+        m_Texture: {fileID: 2800000, guid: 8a569146d91537d47ac4260dcc3a5d0d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -96,18 +100,18 @@ Material:
     - Vector1_052f4162dd074549ac6527fd89eb3400: 2
     - Vector1_2d68f597c2094555a44c224a1d6c52c8: 1
     - Vector1_519cfb38a13544be9492f5f286167bad: 10
-    - Vector1_5d9ec908a4b04c7db26308997912555f: 4
-    - Vector1_5fb6393fe9ee48a8936e1b06a60de410: 1
+    - Vector1_5d9ec908a4b04c7db26308997912555f: 3
+    - Vector1_5fb6393fe9ee48a8936e1b06a60de410: 1.5
     - Vector1_64f136dd77224ef8a2acb042a23cd40b: 1
-    - Vector1_8a2010c08e5d4a77b7e10847460b6efa: 0.1
-    - Vector1_9a206cd1d3b14265b38135a5c8d6c154: 1
-    - Vector1_a201e168f9ab43a7a27d4f4e048b005d: 1
+    - Vector1_8a2010c08e5d4a77b7e10847460b6efa: 1
+    - Vector1_9a206cd1d3b14265b38135a5c8d6c154: 0.5
+    - Vector1_a201e168f9ab43a7a27d4f4e048b005d: 0.25
     - Vector1_a2a7bbb830834c7f8a83cb948eb867f3: 0.0008
-    - Vector1_afca4bed197c486e892accea42f43907: 1
-    - Vector1_bccfbd93bc3d44b68ee3683d27b94cf1: 10
-    - Vector1_c0b9cd2348154922a542380b60ba5202: 4
-    - Vector1_cf7dd9ef333c47f6907e1b39cfda97b7: 8.13
-    - Vector1_e7598ca9adde4aa3bb192f80739cbf4b: 6
+    - Vector1_afca4bed197c486e892accea42f43907: 10
+    - Vector1_bccfbd93bc3d44b68ee3683d27b94cf1: 1
+    - Vector1_c0b9cd2348154922a542380b60ba5202: 100
+    - Vector1_cf7dd9ef333c47f6907e1b39cfda97b7: 1
+    - Vector1_e7598ca9adde4aa3bb192f80739cbf4b: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
