@@ -6,18 +6,57 @@ public class LevelControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Globals.levelPassed = false;
-        if (DummyAsteroidChecker() == 1)
+        if (!Globals.levelEndless)
         {
-            Globals.level += 1;
-            Globals.levelPassed = true;
+            if (!Globals.endOfGame)
+            {
+                if (Globals.startReset)
+                {
+                    Globals.levelPassed = true;
+                    LevelTransition();
+                }
+                else
+                {
+                    Globals.levelPassed = false;
+                }
+                
+                if (DummyAsteroidChecker() == 1)
+                {
+                    if (Globals.level == 3)
+                    {
+                        Globals.levelPassed = true;
+                        Globals.endOfGame = true;
+                        Globals.level = 0;
+                    }
+                    else
+                    {
+                        Globals.levelPassed = true;
+                    }
+                }
+                if (Globals.collided)
+                {
+                    Globals.endOfGame = true;
+                }
+            }
+            else
+            {
+                EndGame(Globals.collided);
+            }
         }
-        if (Globals.level == 3)
+        else
         {
-            Globals.endOfGame = true;
-            Globals.level = 0;
+            if (!Globals.endOfGame)
+            {
+                if (Globals.collided)
+                {
+                    Globals.endOfGame = true;
+                }
+            }
+            else
+            {
+                EndGame(Globals.collided);
+            }
         }
-        
     }
     
     int DummyAsteroidChecker()
@@ -26,4 +65,29 @@ public class LevelControl : MonoBehaviour
         System.Random random = new System.Random();
         return random.Next(50);
     }
+    
+    void LevelTransition()
+    {
+        // DisplayPoints
+        Globals.timer = 500;
+        Globals.level += 1;
+        Globals.startReset = false;
+        Globals.levelPassed = false;
+    }
+    
+    void EndGame(bool collided)
+    {
+        if (collided)
+        {
+            // DisplayGameOver
+        }
+        else
+        {
+            // DisplaySuccess
+        }
+        // DisplayPoints
+        // DisplayHighScore
+        // LevelSelection
+    }
+        
 }
