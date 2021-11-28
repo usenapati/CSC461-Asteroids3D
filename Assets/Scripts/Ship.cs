@@ -3,23 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
-[RequireComponent (typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody))]
 public class Ship : MonoBehaviour
 {
-    [Header("Ship Movement Setting")]
+    [Header("Ship Third Person Movement Setting")]
     [SerializeField]
-    private float yawTorque = 500f;
+    private float tpYawTorque = 500f;
     [SerializeField]
-    private float pitchTorque = 1000f;
+    private float tpPitchTorque = 1000f;
     [SerializeField]
-    private float rollTorque = 1000f;
+    private float tpRollTorque = 1000f;
     [SerializeField]
-    private float thrust = 100f;
+    private float tpThrust = 100f;
     [SerializeField]
-    private float upThrust = 50f;
+    private float tpUpThrust = 50f;
     [SerializeField]
-    private float strafeThrust = 50f;
+    private float tpStrafeThrust = 50f;
+
+    [Header("Ship First Person Movement Setting")]
+    [SerializeField]
+    private float fpRollTorque = 1000f;
+    [SerializeField]
+    private float fpThrust = 100f;
+    [SerializeField]
+    private float fpUpThrust = 50f;
+    [SerializeField]
+    private float fpStrafeThrust = 50f;
 
     [Header("Boost Setting")]
     [SerializeField]
@@ -33,6 +44,9 @@ public class Ship : MonoBehaviour
     public bool boosting = false;
     public float currentBoostAmount;
 
+    [SerializeField] private CinemachineVirtualCamera shipFirstPersonCam;
+    [SerializeField] private CinemachineVirtualCamera shipThirdPersonCam;
+
     [SerializeField, Range(0.001f, 0.999f)]
     private float thrustGlideReduction = 0.999f;
     [SerializeField, Range(0.001f, 0.999f)]
@@ -44,15 +58,27 @@ public class Ship : MonoBehaviour
     Rigidbody rb;
 
     // Input Values
-    public float thrust1D;
-    public float upDown1D;
-    public float strafe1D;
+    private float thrust1D;
+    private float upDown1D;
+    private float strafe1D;
     private float roll1D;
     private Vector2 pitchYaw;
 
+    public bool isThirdPerson = true;
+
     void Start()
     {
+        if (shipFirstPersonCam != null)
+        {
+            CinemachineCameraSwitcher.Register(shipFirstPersonCam);
+        }
+        if (shipThirdPersonCam != null)
+        {
+            CinemachineCameraSwitcher.Register(shipThirdPersonCam);
+        }
+        CinemachineCameraSwitcher.SwitchCamera(shipThirdPersonCam);
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
         currentBoostAmount = maxBoostAmount;
     }
 
@@ -83,57 +109,115 @@ public class Ship : MonoBehaviour
 
     void HandleMovement()
     {
-        // Roll
-        rb.AddRelativeTorque(Vector3.back * roll1D * rollTorque * Time.fixedDeltaTime);
-        // Pitch
-        rb.AddRelativeTorque(Vector3.right * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * pitchTorque * Time.fixedDeltaTime);
-        // Yaw
-        rb.AddRelativeTorque(Vector3.up * Mathf.Clamp(pitchYaw.x, -1f, 1f) * yawTorque * Time.fixedDeltaTime);
-
-        // Thrust
-        if (thrust1D > 0.1f || thrust1D < -0.1f)
+        if (isThirdPerson)
         {
-            float currentThrust;
+            // Roll
+            rb.AddRelativeTorque(Vector3.back * roll1D * tpRollTorque * Time.fixedDeltaTime);
+            // Pitch
+            rb.AddRelativeTorque(Vector3.right * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * tpPitchTorque * Time.fixedDeltaTime);
+            // Yaw
+            rb.AddRelativeTorque(Vector3.up * Mathf.Clamp(pitchYaw.x, -1f, 1f) * tpYawTorque * Time.fixedDeltaTime);
 
-            if (boosting)
+            // Thrust
+            if (thrust1D > 0.1f || thrust1D < -0.1f)
             {
-                currentThrust = thrust * boostMultiplier;
+                float currentThrust;
+
+                if (boosting)
+                {
+                    currentThrust = tpThrust * boostMultiplier;
+                }
+                else
+                {
+                    currentThrust = tpThrust;
+                }
+                rb.AddForce(transform.forward * thrust1D * currentThrust * Time.fixedDeltaTime);
+                glide = thrust1D * currentThrust;
             }
             else
             {
-                currentThrust = thrust;
+                rb.AddForce(transform.forward * glide * Time.fixedDeltaTime);
+                glide *= thrustGlideReduction;
             }
-            rb.AddForce(transform.forward * thrust1D * currentThrust * Time.fixedDeltaTime);
-            glide = thrust1D * currentThrust;
-        }
-        else
-        {
-            rb.AddForce(transform.forward * glide * Time.fixedDeltaTime);
-            glide *= thrustGlideReduction;
-        }
 
-        // Up/Down
-        if (upDown1D > 0.1f || upDown1D < -0.1f)
-        {
-            rb.AddRelativeForce(transform.up * upDown1D * upThrust * Time.fixedDeltaTime);
-            verticalGlide = upDown1D * upThrust;
+            // Up/Down
+            if (upDown1D > 0.1f || upDown1D < -0.1f)
+            {
+                rb.AddRelativeForce(transform.up * upDown1D * tpUpThrust * Time.fixedDeltaTime);
+                verticalGlide = upDown1D * tpUpThrust;
+            }
+            else
+            {
+                rb.AddRelativeForce(transform.up * verticalGlide * Time.fixedDeltaTime);
+                verticalGlide *= upDownGlideReduction;
+            }
+            // Strafing
+            if (strafe1D > 0.1f || strafe1D < -0.1f)
+            {
+                rb.AddRelativeForce(transform.right * strafe1D * tpStrafeThrust * Time.fixedDeltaTime);
+                horizontalGlide = strafe1D * tpStrafeThrust;
+            }
+            else
+            {
+                rb.AddRelativeForce(transform.right * horizontalGlide * Time.fixedDeltaTime);
+                horizontalGlide *= leftRightGlideReduction;
+            }
         }
         else
         {
-            rb.AddRelativeForce(transform.up * verticalGlide * Time.fixedDeltaTime);
-            verticalGlide *= upDownGlideReduction;
-        }
-        // Strafing
-        if (strafe1D > 0.1f || strafe1D < -0.1f)
-        {
-            rb.AddRelativeForce(transform.right * strafe1D * strafeThrust * Time.fixedDeltaTime);
-            horizontalGlide = strafe1D * strafeThrust;
-        }
-        else
-        {
-            rb.AddRelativeForce(transform.right * horizontalGlide * Time.fixedDeltaTime);
-            horizontalGlide *= leftRightGlideReduction;
-        }
+            // Roll
+            rb.AddTorque(-shipFirstPersonCam.transform.forward * roll1D * fpRollTorque * Time.fixedDeltaTime);
+            // Pitch
+            rb.AddRelativeTorque(Vector3.right * Mathf.Clamp(-pitchYaw.y, -1f, 1f) * tpPitchTorque * Time.fixedDeltaTime);
+            // Yaw
+            rb.AddRelativeTorque(Vector3.up * Mathf.Clamp(pitchYaw.x, -1f, 1f) * tpYawTorque * Time.fixedDeltaTime);
+
+            // Thrust
+            if (thrust1D > 0.1f || thrust1D < -0.1f)
+            {
+                float currentThrust;
+
+                if (boosting)
+                {
+                    currentThrust = fpThrust * boostMultiplier;
+                }
+                else
+                {
+                    currentThrust = fpThrust;
+                }
+                rb.AddForce(shipFirstPersonCam.transform.forward * thrust1D * currentThrust * Time.fixedDeltaTime);
+                glide = thrust1D * currentThrust;
+            }
+            else
+            {
+                rb.AddForce(shipFirstPersonCam.transform.forward * glide * Time.fixedDeltaTime);
+                glide *= thrustGlideReduction;
+            }
+
+            // Up/Down
+            if (upDown1D > 0.1f || upDown1D < -0.1f)
+            {
+                rb.AddForce(transform.up * upDown1D * fpUpThrust * Time.fixedDeltaTime);
+                verticalGlide = upDown1D * fpUpThrust;
+            }
+            else
+            {
+                rb.AddForce(transform.up * verticalGlide * Time.fixedDeltaTime);
+                verticalGlide *= upDownGlideReduction;
+            }
+            // Strafing
+            if (strafe1D > 0.1f || strafe1D < -0.1f)
+            {
+                rb.AddForce(shipFirstPersonCam.transform.right * strafe1D * fpStrafeThrust * Time.fixedDeltaTime);
+                horizontalGlide = strafe1D * fpStrafeThrust;
+            }
+            else
+            {
+                rb.AddForce(shipFirstPersonCam.transform.right * horizontalGlide * Time.fixedDeltaTime);
+                horizontalGlide *= leftRightGlideReduction;
+            }
+        }       
+        
     }
 
     #region Input Methods
@@ -160,6 +244,27 @@ public class Ship : MonoBehaviour
     public void OnBoost(InputAction.CallbackContext context)
     {
         boosting = context.performed;
+    }
+
+    public void OnToggleCamera(InputAction.CallbackContext context)
+    {
+        if (context.action.triggered)
+        {
+            
+            if (CinemachineCameraSwitcher.isActiveCamera(shipThirdPersonCam))
+            {
+                Debug.Log("Switching Camera to First Person");
+                CinemachineCameraSwitcher.SwitchCamera(shipFirstPersonCam);
+                isThirdPerson = false;
+            }
+            else if (CinemachineCameraSwitcher.isActiveCamera(shipFirstPersonCam))
+            {
+                Debug.Log("Switching Camera to Third Person");
+                CinemachineCameraSwitcher.SwitchCamera(shipThirdPersonCam);
+                isThirdPerson = true;
+            }
+
+        }
     }
     #endregion
 }

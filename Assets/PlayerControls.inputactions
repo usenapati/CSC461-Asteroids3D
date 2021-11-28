@@ -46,9 +46,25 @@
                     "interactions": ""
                 },
                 {
+                    "name": "LookMovement",
+                    "type": "PassThrough",
+                    "id": "18515eea-1417-4b9b-9d13-67ca5b3874c6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Boost",
                     "type": "PassThrough",
                     "id": "5477e5ec-c40d-41e1-b855-0ccd3592791b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "ToggleCamera",
+                    "type": "PassThrough",
+                    "id": "971e044f-e0d0-4241-bddc-30f0dc56ab66",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
@@ -360,6 +376,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5885e0ab-851e-43e6-bdbe-b76207aee1da",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b52d483-85b4-457c-aa16-485128296988",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8825601-01e4-4987-9c4f-0824d52c7c5c",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LookMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d8e4ac47-cbc7-44de-a9bf-3d3096dffa23",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LookMovement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
