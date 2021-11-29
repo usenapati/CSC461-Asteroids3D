@@ -46,20 +46,23 @@ public class Asteroid : MonoBehaviour
     
     void Destroyed()
     {
-        if (size == 3)
+        // Split each asteroid into two other asteroids if it is big enough
+        if (size == 2)
         {
             Globals.points += 500;
-            // Split
+            Globals.asteroidArray[id] = new Asteroid(1);
+            Globals.asteroidArray[Globals.currentID] = new Asteroid(1);
         }
-        else if (size == 2)
+        else if (size == 1)
         {
             Globals.points += 250;
-            // Split
+            Globals.asteroidArray[id] = new Asteroid(0);
+            Globals.asteroidArray[Globals.currentID] = new Asteroid(0);
         }
         else
         {
             Globals.points += 100;
-            // Split
+            Globals.asteroidArray[id] = null;
         }
     }
     

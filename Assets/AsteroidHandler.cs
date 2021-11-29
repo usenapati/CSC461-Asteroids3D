@@ -2,15 +2,11 @@ using UnityEngine;
 
 public class AsteroidHandler : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     public static void CreateAsteroids()
     {
         System.Random random = new System.Random();
+        Globals.currentID = 0;
         if (Globals.level == 0)
         {
             for (int i = 0; i < 10; i++)
