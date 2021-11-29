@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17316318, g: 0.16457182, b: 0.29665613, a: 1}
+  m_IndirectSpecularColor: {r: 0.17323539, g: 0.16459554, b: 0.2966911, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -177,6 +177,18 @@ PrefabInstance:
     - target: {fileID: 522940619832330039, guid: 75171a56d3afb944daab547edd972298, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 522940619832330040, guid: 75171a56d3afb944daab547edd972298, type: 3}
+      propertyPath: tpYawTorque
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 522940619832330040, guid: 75171a56d3afb944daab547edd972298, type: 3}
+      propertyPath: tpRollTorque
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 522940619832330040, guid: 75171a56d3afb944daab547edd972298, type: 3}
+      propertyPath: tpPitchTorque
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75171a56d3afb944daab547edd972298, type: 3}
