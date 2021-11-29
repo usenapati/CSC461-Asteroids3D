@@ -10,7 +10,9 @@ public class Globals : MonoBehaviour
     public static bool levelPassed = false;
     public static bool startReset = false;
     public static bool endOfGame = false;
+    public static bool onMenu = true;
     public static int timer = 500;
     public static int[] asteroidArray = new int[10];
     public static bool collided = false;
+    public static bool ranOut = false;
 }

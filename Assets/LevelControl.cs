@@ -6,66 +6,82 @@ public class LevelControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Globals.levelEndless)
+        // If not on the menu
+        if (!Globals.onMenu)
         {
-            if (!Globals.endOfGame)
+            // If playing level-based
+            if (!Globals.levelEndless)
             {
-                if (Globals.startReset)
+                // If the game is ongoing
+                if (!Globals.endOfGame)
                 {
-                    Globals.levelPassed = true;
-                    LevelTransition();
-                }
-                else
-                {
-                    Globals.levelPassed = false;
-                }
-                
-                if (DummyAsteroidChecker() == 1)
-                {
-                    if (Globals.level == 3)
+                    // If we are going to the next level
+                    if (Globals.startReset)
                     {
+                        // Make sure the level doesn't progress while setting up next level
                         Globals.levelPassed = true;
-                        Globals.endOfGame = true;
-                        Globals.level = 0;
+                        LevelTransition();
                     }
                     else
                     {
+                        Globals.levelPassed = false;
+                    }
+                    
+                    // If all the asteroids have been destroyed, start level transition
+                    if (Globals.asteroidArray.Length == 0)
+                    {
+                        if (Globals.level == 3)
+                        {
+                            Globals.endOfGame = true;
+                        }
                         Globals.levelPassed = true;
                     }
+                    // If the spaceship has collided with an asteroid, end the game
+                    if (Globals.collided)
+                    {
+                        Globals.endOfGame = true;
+                    }
                 }
-                if (Globals.collided)
+                // Initiate end game sequence
+                else
                 {
-                    Globals.endOfGame = true;
+                    EndGame();
                 }
             }
+            // If playing endless
             else
             {
-                EndGame(Globals.collided);
+                if (!Globals.endOfGame)
+                {
+                    // Pretty much only check if the spaceship has collided
+                    if (Globals.collided)
+                    {
+                        Globals.endOfGame = true;
+                    }
+                }
+                else
+                {
+                    EndGame();
+                }
             }
         }
         else
         {
-            if (!Globals.endOfGame)
+            /*
+            if (endlessSelected)
             {
-                if (Globals.collided)
-                {
-                    Globals.endOfGame = true;
-                }
+                Globals.levelEndless = true;
             }
             else
             {
-                EndGame(Globals.collided);
+                Globals.levelEndless = false;
             }
+            Globals.onMenu = false;            
+            */
         }
     }
     
-    int DummyAsteroidChecker()
-    {
-        // return asteroidArray.length
-        System.Random random = new System.Random();
-        return random.Next(50);
-    }
-    
+    // Sets up the next level
     void LevelTransition()
     {
         // DisplayPoints
@@ -75,19 +91,38 @@ public class LevelControl : MonoBehaviour
         Globals.levelPassed = false;
     }
     
-    void EndGame(bool collided)
+    // Controls the end game sequence
+    void EndGame()
     {
-        if (collided)
+        // If collided or ran out of time, display game over screen
+        if (Globals.collided || Globals.ranOut)
         {
             // DisplayGameOver
         }
+        // If finished the game, display success screen
         else
         {
             // DisplaySuccess
         }
         // DisplayPoints
         // DisplayHighScore
-        // LevelSelection
+        // LevelSelection: Retry or Back to Main Menu
+        /**
+        if (retrySelected)
+        {
+            if (!Globals.levelEndless)
+            {
+                Globals.level = 0;
+                Globals.timer = 500;
+            }
+            Globals.endOfGame = false;
+            Globals.levelPassed = false;
+        }
+        else
+        {
+            Globals.onMenu = true;
+        }
+        */
     }
         
 }
