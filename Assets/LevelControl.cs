@@ -85,6 +85,7 @@ public class LevelControl : MonoBehaviour
     void LevelTransition()
     {
         // DisplayPoints
+        AsteroidHandler.CreateAsteroids();
         Globals.timer = 500;
         Globals.level += 1;
         Globals.startReset = false;
@@ -114,6 +115,7 @@ public class LevelControl : MonoBehaviour
             {
                 Globals.level = 0;
                 Globals.timer = 500;
+                AsteroidHandler.CreateAsteroids();
             }
             Globals.endOfGame = false;
             Globals.levelPassed = false;

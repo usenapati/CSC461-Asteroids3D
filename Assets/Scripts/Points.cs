@@ -29,7 +29,6 @@ public class Points : MonoBehaviour
                         Globals.points += 25;
                     }
                     
-                    //Debug.Log("Points:     " + Globals.points);
                     //Debug.Log("High Score: " + Globals.highScore);
                     //Debug.Log("Level: " + Globals.level);
                     //Debug.Log("Timer: " + Globals.timer);

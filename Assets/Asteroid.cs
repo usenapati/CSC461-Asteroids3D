@@ -4,15 +4,18 @@ public class Asteroid : MonoBehaviour
 {
     private int health;
     private int size;
+    private int id;
     
     public Asteroid(int initSize)
     {
         size = initSize;
-        if (size == 3)
+        id = Globals.currentID;
+        Globals.currentID++;
+        if (size == 2)
         {
             health = 5;
         }
-        else if (size == 2)
+        else if (size == 1)
         {
             health = 2;
         }
