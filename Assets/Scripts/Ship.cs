@@ -224,26 +224,32 @@ public class Ship : MonoBehaviour
     public void OnThrust(InputAction.CallbackContext context)
     {
         thrust1D = context.ReadValue<float>();
+        Debug.Log(thrust1D);
     }
     public void OnStrafe(InputAction.CallbackContext context)
     {
         strafe1D = context.ReadValue<float>();
+        Debug.Log(thrust1D);
     }
     public void OnUpDown(InputAction.CallbackContext context)
     {
         upDown1D = context.ReadValue<float>();
+        Debug.Log(thrust1D);
     }
     public void OnRoll(InputAction.CallbackContext context)
     {
         roll1D = context.ReadValue<float>();
+        Debug.Log(thrust1D);
     }
     public void OnPitchYaw(InputAction.CallbackContext context)
     {
         pitchYaw = context.ReadValue<Vector2>();
+        Debug.Log(thrust1D);
     }
     public void OnBoost(InputAction.CallbackContext context)
     {
         boosting = context.performed;
+        Debug.Log(thrust1D);
     }
 
     public void OnToggleCamera(InputAction.CallbackContext context)
@@ -265,6 +271,7 @@ public class Ship : MonoBehaviour
             }
 
         }
+        Debug.Log(thrust1D);
     }
     #endregion
 }

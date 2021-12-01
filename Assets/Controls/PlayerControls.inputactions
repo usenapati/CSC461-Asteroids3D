@@ -9,7 +9,7 @@
                     "name": "Thrust",
                     "type": "PassThrough",
                     "id": "bc004f40-408e-4d54-8594-616467d569e8",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
@@ -17,7 +17,7 @@
                     "name": "Strafe",
                     "type": "PassThrough",
                     "id": "7d0ed8b7-0ea1-46f9-ab8b-ea50ff21bf54",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
@@ -25,7 +25,7 @@
                     "name": "UpDown",
                     "type": "PassThrough",
                     "id": "4b318676-4b50-471d-b244-cc842f63316f",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },

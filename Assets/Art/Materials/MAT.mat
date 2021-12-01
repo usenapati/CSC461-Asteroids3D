@@ -106,11 +106,11 @@ Material:
     - Vector1_8a2010c08e5d4a77b7e10847460b6efa: 0.25
     - Vector1_9a206cd1d3b14265b38135a5c8d6c154: 3.25
     - Vector1_a201e168f9ab43a7a27d4f4e048b005d: 0.5
-    - Vector1_a2a7bbb830834c7f8a83cb948eb867f3: 0.0008
+    - Vector1_a2a7bbb830834c7f8a83cb948eb867f3: 0.001
     - Vector1_afca4bed197c486e892accea42f43907: 10
     - Vector1_bccfbd93bc3d44b68ee3683d27b94cf1: 500
     - Vector1_c0b9cd2348154922a542380b60ba5202: 100
-    - Vector1_cf7dd9ef333c47f6907e1b39cfda97b7: 1
+    - Vector1_cf7dd9ef333c47f6907e1b39cfda97b7: 2
     - Vector1_e7598ca9adde4aa3bb192f80739cbf4b: 3
     - _AlphaClip: 0
     - _Blend: 0
