@@ -6,53 +6,53 @@ public class Points : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Globals.onMenu)
+        if (!GameManager.onMenu)
         {
-            if (!Globals.levelEndless)
+            if (!GameManager.levelEndless)
             {
-                if (!Globals.endOfGame)
+                if (!GameManager.endOfGame)
                 {
                     // Decrement timer on every tick
-                    Globals.timer -= 1;
-                    if (Globals.timer == 0)
+                    GameManager.timer -= 1;
+                    if (GameManager.timer == 0)
                     {
-                        Globals.endOfGame = true;
-                        Globals.ranOut = true;
+                        GameManager.endOfGame = true;
+                        GameManager.ranOut = true;
                     }
                     
                     // The following is testing for points
-                    if (Globals.points == 0)
+                    if (GameManager.points == 0)
                     {
-                        Globals.points += 100;
+                        GameManager.points += 100;
                     } else
                     {
-                        Globals.points += 25;
+                        GameManager.points += 25;
                     }
                     
                     //Debug.Log("High Score: " + Globals.highScore);
                     //Debug.Log("Level: " + Globals.level);
                     //Debug.Log("Timer: " + Globals.timer);
                     
-                    if (Globals.levelPassed)
+                    if (GameManager.levelPassed)
                     {
-                        int levelBonus = Globals.level * 2500;
-                        int timeBonus = Globals.timer * 10;            
+                        int levelBonus = GameManager.level * 2500;
+                        int timeBonus = GameManager.timer * 10;            
                         // Display both         
-                        Globals.points += (levelBonus + timeBonus);
+                        GameManager.points += (levelBonus + timeBonus);
                         Debug.Log(timeBonus);
-                        Globals.startReset = true;            
+                        GameManager.startReset = true;            
                     }
                 }
             }
             else
             {        
-                if (Globals.endOfGame)
+                if (GameManager.endOfGame)
                 {
-                    if (Globals.points > Globals.highScore)
+                    if (GameManager.points > GameManager.highScore)
                     {
-                        Globals.highScore = Globals.points;
+                        GameManager.highScore = GameManager.points;
                     }
-                    Globals.points = 0;
+                    GameManager.points = 0;
                 }
             }
         }

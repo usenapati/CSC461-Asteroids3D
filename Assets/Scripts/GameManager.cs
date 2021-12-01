@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Globals : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     
     public static int highScore = 0;
@@ -12,8 +12,18 @@ public class Globals : MonoBehaviour
     public static bool endOfGame = false;
     public static bool onMenu = true;
     public static int timer = 500;
-    public static Asteroid[] asteroidArray = new Asteroid[50];
+    public static AsteroidSpawner asteroidSpawner;
     public static int currentID = 0;
     public static bool collided = false;
     public static bool ranOut = false;
+
+    private void Awake()
+    {
+        asteroidSpawner = FindObjectOfType<AsteroidSpawner>();
+    }
+
+    private void FixedUpdate()
+    {
+        Debug.Log("Points: " + points);
+    }
 }

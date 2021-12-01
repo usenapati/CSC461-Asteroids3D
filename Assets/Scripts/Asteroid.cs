@@ -1,34 +1,73 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Asteroid : MonoBehaviour
 {
-    private int health;
-    private int size;
+    Rigidbody rb;
+
+    public float initialForce = 10f;
+    public float initialTorque = 10f;
+
+    public float health;
+    public int size;
     private int id;
     
     public Asteroid(int initSize)
     {
         size = initSize;
-        id = Globals.currentID;
-        Globals.currentID++;
+        id = GameManager.currentID;
+        GameManager.currentID++;
+        //LARGE
         if (size == 2)
         {
             health = 5;
         }
+        //MEDIUM
         else if (size == 1)
         {
             health = 2;
         }
+        //SMALL
+        else
+        {
+            health = 1;
+        }
+    }
+    
+    public Asteroid()
+    {
+        id = GameManager.currentID;
+        GameManager.currentID++;
+        //LARGE
+        if (size == 2)
+        {
+            health = 5;
+        }
+        //MEDIUM
+        else if (size == 1)
+        {
+            health = 2;
+        }
+        //SMALL
         else
         {
             health = 1;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        if (!Globals.endOfGame)
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.isKinematic = true;
+        rb.AddForce(Vector3.forward * initialForce);
+        rb.AddTorque(Vector3.forward * initialTorque);
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (!GameManager.endOfGame)
         {
             CollisionChecker();
             bool hit = false;
@@ -43,26 +82,43 @@ public class Asteroid : MonoBehaviour
             }
         }
     }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+
+        Debug.Log($"Taking damage, new health at {health}");
+
+        if (health <= 0)
+        {
+            Destroyed();
+        }
+    }
     
     void Destroyed()
     {
         // Split each asteroid into two other asteroids if it is big enough
         if (size == 2)
         {
-            Globals.points += 500;
-            Globals.asteroidArray[id] = new Asteroid(1);
-            Globals.asteroidArray[Globals.currentID] = new Asteroid(1);
+            GameManager.points += 500;
+            GameManager.asteroidSpawner.SpawnAsteroid(this.transform.position, 1);
+            Destroy(this.gameObject);
+            //GameManager.asteroidArray[id] = new Asteroid(1);
+            //GameManager.asteroidArray[GameManager.currentID] = new Asteroid(1);
         }
         else if (size == 1)
         {
-            Globals.points += 250;
-            Globals.asteroidArray[id] = new Asteroid(0);
-            Globals.asteroidArray[Globals.currentID] = new Asteroid(0);
+            GameManager.points += 250;
+            GameManager.asteroidSpawner.SpawnAsteroid(this.transform.position, 0);
+            Destroy(this.gameObject);
+            //GameManager.asteroidArray[id] = new Asteroid(0);
+            //GameManager.asteroidArray[GameManager.currentID] = new Asteroid(0);
         }
         else
         {
-            Globals.points += 100;
-            Globals.asteroidArray[id] = null;
+            GameManager.points += 100;
+            Destroy(this.gameObject);
+            //GameManager.asteroidArray[id] = null;
         }
     }
     
@@ -73,5 +129,11 @@ public class Asteroid : MonoBehaviour
         //  Globals.collided = true;  
         //
     }
-    
+
+    private void OnDestroy()
+    {
+        //Instantiate Destruction Particles
+        //Play Explosion SFX
+    }
+
 }

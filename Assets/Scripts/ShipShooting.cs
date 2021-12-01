@@ -25,7 +25,10 @@ public class ShipShooting : MonoBehaviour
     [SerializeField]
     private ParticleSystem laserHitParticles;
     [SerializeField]
-    private float laserPower = 2f;
+    private float laserDamage = 2f;
+    [SerializeField]
+    private float timeBetweenDamage = 0.25f;
+    private float currentTimeBetweenDamage;
     [SerializeField]
     private float laserHeatThreshold = 2f;
     [SerializeField]
@@ -74,12 +77,29 @@ public class ShipShooting : MonoBehaviour
         }
     }
 
+    void ApplyDamage(Asteroid asteroid)
+    {
+        currentTimeBetweenDamage += Time.deltaTime;
+        if (currentTimeBetweenDamage > timeBetweenDamage)
+        {
+            currentTimeBetweenDamage = 0f;
+            asteroid.TakeDamage(laserDamage);
+            Debug.Log("Applying damage to: " + asteroid.gameObject.name);
+        }
+        
+    }
+
     void FireLaser()
     {
         RaycastHit hitInfo;
 
         if (TargetInfo.IsTargetInRange(cam.transform.position, cam.transform.forward, out hitInfo, hardpointRange, shootableMask))
         {
+            if (hitInfo.collider.GetComponentInParent<Asteroid>())
+            {
+                ApplyDamage(hitInfo.collider.GetComponentInParent<Asteroid>());
+            }
+            
             Instantiate(laserHitParticles, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
 
             foreach(var laser in lasers)
