@@ -9,7 +9,7 @@
                     "name": "Thrust",
                     "type": "PassThrough",
                     "id": "bc004f40-408e-4d54-8594-616467d569e8",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
@@ -17,7 +17,7 @@
                     "name": "Strafe",
                     "type": "PassThrough",
                     "id": "7d0ed8b7-0ea1-46f9-ab8b-ea50ff21bf54",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
@@ -25,7 +25,7 @@
                     "name": "UpDown",
                     "type": "PassThrough",
                     "id": "4b318676-4b50-471d-b244-cc842f63316f",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
@@ -65,6 +65,14 @@
                     "name": "ToggleCamera",
                     "type": "PassThrough",
                     "id": "971e044f-e0d0-4241-bddc-30f0dc56ab66",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "Fire",
+                    "type": "PassThrough",
+                    "id": "25bd265f-b457-428f-86ad-765dcd23027c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
@@ -420,6 +428,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "LookMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07278238-4842-45b9-87cc-714a3cbde9b9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d2e335ea-9a35-48e4-85bd-536753a6ebd7",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

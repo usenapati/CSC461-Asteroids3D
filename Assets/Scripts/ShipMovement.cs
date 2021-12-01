@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Ship : MonoBehaviour
+public class ShipMovement : MonoBehaviour
 {
     [Header("Ship Third Person Movement Setting")]
     [SerializeField]
@@ -44,8 +44,8 @@ public class Ship : MonoBehaviour
     public bool boosting = false;
     public float currentBoostAmount;
 
-    [SerializeField] private CinemachineVirtualCamera shipFirstPersonCam;
-    [SerializeField] private CinemachineVirtualCamera shipThirdPersonCam;
+    [SerializeField] public CinemachineVirtualCamera shipFirstPersonCam;
+    [SerializeField] public CinemachineVirtualCamera shipThirdPersonCam;
 
     [SerializeField, Range(0.001f, 0.999f)]
     private float thrustGlideReduction = 0.999f;
@@ -66,6 +66,24 @@ public class Ship : MonoBehaviour
 
     public bool isThirdPerson = true;
 
+    //FX variables
+    [SerializeField]
+    List<ParticleSystem> forwardFX;
+    [SerializeField]
+    List<ParticleSystem> backFX;
+    [SerializeField]
+    List<ParticleSystem> upFX;
+    [SerializeField]
+    List<ParticleSystem> downFX;
+    [SerializeField]
+    List<ParticleSystem> leftFX;
+    [SerializeField]
+    List<ParticleSystem> rightFX;
+    [SerializeField]
+    TrailRenderer boostTrail;
+    [SerializeField]
+    ParticleSystem boostFX;
+
     void Start()
     {
         if (shipFirstPersonCam != null)
@@ -80,12 +98,126 @@ public class Ship : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
         currentBoostAmount = maxBoostAmount;
+        boostTrail.emitting = true;
     }
 
     void FixedUpdate()
     {
         HandleBoosting();
         HandleMovement();
+        HandleFX();
+    }
+
+    void HandleFX() 
+    {
+        if (thrust1D > 0) {
+            //forward fx
+            foreach (ParticleSystem p in forwardFX)
+            {
+                p.Play();
+            }
+
+            if (boosting)
+            {
+                boostFX.Play();
+                boostTrail.emitting = true;
+            }
+            else
+            {
+                boostFX.Stop();
+                boostTrail.emitting = false;
+            }
+        }
+        else if (thrust1D < 0) {
+            //back fx
+            foreach (ParticleSystem p in backFX)
+            {
+                p.Play();
+            }
+
+            if (boosting)
+            {
+                boostFX.Play();
+                boostTrail.emitting = true;
+            }
+            else
+            {
+                boostFX.Stop();
+                boostTrail.emitting = false;
+            }
+        }
+        else
+        {
+            foreach (ParticleSystem p in forwardFX)
+            {
+                p.Stop();
+            }
+            foreach (ParticleSystem p in backFX)
+            {
+                p.Stop();
+            }
+            boostFX.Stop();
+            boostTrail.emitting = false;
+        }
+
+        if (upDown1D > 0)
+        {
+            //up fx
+            foreach (ParticleSystem p in upFX)
+            {
+                p.Play();
+            }
+
+        }
+        else if (upDown1D < 0)
+        {
+            //down fx
+            foreach (ParticleSystem p in downFX)
+            {
+                p.Play();
+            }
+        }
+        else
+        {
+            foreach (ParticleSystem p in upFX)
+            {
+                p.Stop();
+            }
+            foreach (ParticleSystem p in downFX)
+            {
+                p.Stop();
+            }
+        }
+
+        if (strafe1D > 0)
+        {
+            //right fx
+            foreach (ParticleSystem p in rightFX)
+            {
+                p.Play();
+            }
+
+        }
+        else if (strafe1D < 0)
+        {
+            //left fx
+            foreach (ParticleSystem p in leftFX)
+            {
+                p.Play();
+            }
+        }
+        else {
+            foreach (ParticleSystem p in leftFX)
+            {
+                p.Stop();
+            }
+            foreach (ParticleSystem p in rightFX)
+            {
+                p.Stop();
+            }
+        }
+
+        
     }
 
     void HandleBoosting()
@@ -143,23 +275,23 @@ public class Ship : MonoBehaviour
             // Up/Down
             if (upDown1D > 0.1f || upDown1D < -0.1f)
             {
-                rb.AddRelativeForce(transform.up * upDown1D * tpUpThrust * Time.fixedDeltaTime);
+                rb.AddRelativeForce(Vector3.up * upDown1D * tpUpThrust * Time.fixedDeltaTime);
                 verticalGlide = upDown1D * tpUpThrust;
             }
             else
             {
-                rb.AddRelativeForce(transform.up * verticalGlide * Time.fixedDeltaTime);
+                rb.AddRelativeForce(Vector3.up * verticalGlide * Time.fixedDeltaTime);
                 verticalGlide *= upDownGlideReduction;
             }
             // Strafing
             if (strafe1D > 0.1f || strafe1D < -0.1f)
             {
-                rb.AddRelativeForce(transform.right * strafe1D * tpStrafeThrust * Time.fixedDeltaTime);
+                rb.AddRelativeForce(Vector3.right * strafe1D * tpStrafeThrust * Time.fixedDeltaTime);
                 horizontalGlide = strafe1D * tpStrafeThrust;
             }
             else
             {
-                rb.AddRelativeForce(transform.right * horizontalGlide * Time.fixedDeltaTime);
+                rb.AddRelativeForce(Vector3.right * horizontalGlide * Time.fixedDeltaTime);
                 horizontalGlide *= leftRightGlideReduction;
             }
         }
@@ -224,26 +356,32 @@ public class Ship : MonoBehaviour
     public void OnThrust(InputAction.CallbackContext context)
     {
         thrust1D = context.ReadValue<float>();
+        
     }
     public void OnStrafe(InputAction.CallbackContext context)
     {
         strafe1D = context.ReadValue<float>();
+        
     }
     public void OnUpDown(InputAction.CallbackContext context)
     {
         upDown1D = context.ReadValue<float>();
+        
     }
     public void OnRoll(InputAction.CallbackContext context)
     {
         roll1D = context.ReadValue<float>();
+        
     }
     public void OnPitchYaw(InputAction.CallbackContext context)
     {
         pitchYaw = context.ReadValue<Vector2>();
+        
     }
     public void OnBoost(InputAction.CallbackContext context)
     {
         boosting = context.performed;
+        
     }
 
     public void OnToggleCamera(InputAction.CallbackContext context)
@@ -265,6 +403,7 @@ public class Ship : MonoBehaviour
             }
 
         }
+        Debug.Log(thrust1D);
     }
     #endregion
 }
