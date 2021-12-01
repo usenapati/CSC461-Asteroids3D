@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Ship : MonoBehaviour
+public class ShipMovement : MonoBehaviour
 {
     [Header("Ship Third Person Movement Setting")]
     [SerializeField]
@@ -44,8 +44,8 @@ public class Ship : MonoBehaviour
     public bool boosting = false;
     public float currentBoostAmount;
 
-    [SerializeField] private CinemachineVirtualCamera shipFirstPersonCam;
-    [SerializeField] private CinemachineVirtualCamera shipThirdPersonCam;
+    [SerializeField] public CinemachineVirtualCamera shipFirstPersonCam;
+    [SerializeField] public CinemachineVirtualCamera shipThirdPersonCam;
 
     [SerializeField, Range(0.001f, 0.999f)]
     private float thrustGlideReduction = 0.999f;

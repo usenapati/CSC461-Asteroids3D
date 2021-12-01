@@ -7,39 +7,39 @@ public class LevelControl : MonoBehaviour
     void Update()
     {
         // If not on the menu
-        if (!Globals.onMenu)
+        if (!GameManager.onMenu)
         {
             // If playing level-based
-            if (!Globals.levelEndless)
+            if (!GameManager.levelEndless)
             {
                 // If the game is ongoing
-                if (!Globals.endOfGame)
+                if (!GameManager.endOfGame)
                 {
                     // If we are going to the next level
-                    if (Globals.startReset)
+                    if (GameManager.startReset)
                     {
                         // Make sure the level doesn't progress while setting up next level
-                        Globals.levelPassed = true;
+                        GameManager.levelPassed = true;
                         LevelTransition();
                     }
                     else
                     {
-                        Globals.levelPassed = false;
+                        GameManager.levelPassed = false;
                     }
                     
                     // If all the asteroids have been destroyed, start level transition
-                    if (Globals.asteroidArray.Length == 0)
+                    if (GameManager.asteroidSpawner.transform.childCount == 0)
                     {
-                        if (Globals.level == 3)
+                        if (GameManager.level == 3)
                         {
-                            Globals.endOfGame = true;
+                            GameManager.endOfGame = true;
                         }
-                        Globals.levelPassed = true;
+                        GameManager.levelPassed = true;
                     }
                     // If the spaceship has collided with an asteroid, end the game
-                    if (Globals.collided)
+                    if (GameManager.collided)
                     {
-                        Globals.endOfGame = true;
+                        GameManager.endOfGame = true;
                     }
                 }
                 // Initiate end game sequence
@@ -51,12 +51,12 @@ public class LevelControl : MonoBehaviour
             // If playing endless
             else
             {
-                if (!Globals.endOfGame)
+                if (!GameManager.endOfGame)
                 {
                     // Pretty much only check if the spaceship has collided
-                    if (Globals.collided)
+                    if (GameManager.collided)
                     {
-                        Globals.endOfGame = true;
+                        GameManager.endOfGame = true;
                     }
                 }
                 else
@@ -85,18 +85,18 @@ public class LevelControl : MonoBehaviour
     void LevelTransition()
     {
         // DisplayPoints
-        AsteroidHandler.CreateAsteroids();
-        Globals.timer = 500;
-        Globals.level += 1;
-        Globals.startReset = false;
-        Globals.levelPassed = false;
+        //AsteroidHandler.CreateAsteroids();
+        GameManager.timer = 500;
+        GameManager.level += 1;
+        GameManager.startReset = false;
+        GameManager.levelPassed = false;
     }
     
     // Controls the end game sequence
     void EndGame()
     {
         // If collided or ran out of time, display game over screen
-        if (Globals.collided || Globals.ranOut)
+        if (GameManager.collided || GameManager.ranOut)
         {
             // DisplayGameOver
         }
