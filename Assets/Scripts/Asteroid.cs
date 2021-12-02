@@ -107,7 +107,7 @@ public class Asteroid : MonoBehaviour
         // Split each asteroid into two other asteroids if it is big enough
         if (size == 2)
         {
-            GameManager.points += 500;
+            GameManager.points += 100;
             GameManager.asteroidSpawner.SpawnAsteroid(this.transform.position, 1);
             
             Destroy(this.gameObject);
@@ -125,7 +125,7 @@ public class Asteroid : MonoBehaviour
         }
         else
         {
-            GameManager.points += 100;
+            GameManager.points += 500;
             //OnDestroyed();
             Destroy(this.gameObject);
             //GameManager.asteroidArray[id] = null;

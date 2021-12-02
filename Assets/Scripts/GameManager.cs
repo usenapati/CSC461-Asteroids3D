@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public static bool ranOut = false;
     public static bool gameIsPaused = false;
     public static bool retrySelected = false;
+    public float spawnTime = 20;
+    private float currentSpawnTime;
 
 
     private void Awake()
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
         if (levelEndless)
         {
             FindObjectOfType<StopWatch>().StartStopWatch();
+            currentSpawnTime = spawnTime;
         }
         else
         {
@@ -49,7 +52,7 @@ public class GameManager : MonoBehaviour
         if (retrySelected)
         {
             Debug.Log("Pressed Restart");
-            Invoke("Restart", 0.5f);
+            Invoke("Restart", 0.25f);
             if (gameIsPaused)
             {
                 gameIsPaused = false;
@@ -58,6 +61,13 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f;
             }
             
+        }
+        currentSpawnTime -= Time.deltaTime;
+        if (levelEndless && currentSpawnTime <= 0)
+        {
+            Debug.Log("Spawning Asteroids");
+            SpawnAsteroids();
+            currentSpawnTime = spawnTime;
         }
     }
 
@@ -85,10 +95,14 @@ public class GameManager : MonoBehaviour
             if (levelEndless)
             {
                 FindObjectOfType<StopWatch>().StopStopWatch();
+                // Add Point bonus to points
+                points += (int)FindObjectOfType<StopWatch>().GetCurrentTime();
             }
             else
             {
                 FindObjectOfType<Timer>().StopTimer();
+                // Add Point bonus to points
+                points += (int)FindObjectOfType<Timer>().GetCurrentTime();
             }
             if (levelEndless && points > endlesshighScore)
             {
@@ -121,6 +135,7 @@ public class GameManager : MonoBehaviour
             //Debug.Log("Player has won level");
             FindObjectOfType<Timer>().StopTimer();
             // Add Point bonus to points
+            points += (int) FindObjectOfType<Timer>().GetCurrentTime();
             // DisplaySuccess if level is complete
             if (points > levelhighScore)
             {
@@ -194,4 +209,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void SpawnAsteroids()
+    {
+        asteroidSpawner.SpawnAsteroids();
+    }
 }
