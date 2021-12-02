@@ -387,6 +387,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -10.57
       objectReference: {fileID: 0}
+    - target: {fileID: 5245975907106845218, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
+      propertyPath: fpThrust
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245975907106845218, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
+      propertyPath: tpThrust
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 5245975907106845219, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
       propertyPath: m_RootOrder
       value: 0
