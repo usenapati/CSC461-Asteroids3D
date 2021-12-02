@@ -274,7 +274,7 @@
                 {
                     "name": "negative",
                     "id": "3416dc77-72f9-42f7-b224-0bfcea2d773c",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

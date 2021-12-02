@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        endOfGame = false;
         levelEndless = FindObjectOfType<ModeSelecter>().isEndlessMode;
         asteroidSpawner = FindObjectOfType<AsteroidSpawner>();
         FindObjectOfType<UIManager>().hidePaused();
@@ -141,6 +142,7 @@ public class GameManager : MonoBehaviour
         {
             levelPassed = true;
             endOfGame = true;
+            FindObjectOfType<ShipShooting>().firing = false;
             //Debug.Log("Player has won level");
             FindObjectOfType<Timer>().StopTimer();
             // Add Point bonus to points

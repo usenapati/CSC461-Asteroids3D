@@ -40,7 +40,7 @@ public class ShipShooting : MonoBehaviour
     [SerializeField]
     private AudioSource laserSFX;
 
-    private bool firing;
+    public bool firing;
     private bool isLaser;
 
     private CinemachineVirtualCamera cam;
