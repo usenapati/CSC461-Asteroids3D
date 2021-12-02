@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     public GameObject[] playerUIObjects;
 
     [SerializeField] private ShipMovement shipMovement;
+    [SerializeField] private ShipShooting shipShooting;
 
     //Player UI: Current Score Text
     [SerializeField] private TextMeshProUGUI currentScoreText;
@@ -24,6 +25,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] livesImages;
     //Player UI: Boost Bar
     [SerializeField] private Image boostBarImage;
+    //Player UI: Blaster Crosshair
+    [SerializeField] private GameObject blasterCrosshairImage;
+    //Player UI: Laser Crosshair
+    [SerializeField] private GameObject laserCrosshairImage;
 
     //Pause: Restart Button
     [SerializeField] private Button pauseRestartButton;
@@ -50,12 +55,23 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         shipMovement = FindObjectOfType<ShipMovement>();
+        shipShooting = FindObjectOfType<ShipShooting>();
     }
 
     private void Update()
     {
         if (shipMovement != null)
         {
+            if (shipShooting.fireMode == ShipShooting.FireMode.Blaster)
+            {
+                blasterCrosshairImage.SetActive(true);
+                laserCrosshairImage.SetActive(false);
+            }
+            else if (shipShooting.fireMode == ShipShooting.FireMode.Laser)
+            {
+                blasterCrosshairImage.SetActive(false);
+                laserCrosshairImage.SetActive(true);
+            }
             currentScoreText.text = "Score: " + GameManager.points;
             if (GameManager.levelEndless)
             {
