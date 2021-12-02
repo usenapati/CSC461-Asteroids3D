@@ -1385,7 +1385,6 @@ MonoBehaviour:
   - {fileID: 3747523078541193112, guid: e3d8945ad429b9741b79f70b91a528d0, type: 3}
   - {fileID: 4968727233037697153, guid: e271107c6ba253b4b9d2db2f542407cf, type: 3}
   amountAsteroidsToSpwan: 20
-  amountAsteroidsToSpwan: 38
   minRandomSpawn: -250
   maxRandomSpawn: 250
 --- !u!4 &1902192382
