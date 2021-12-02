@@ -1419,10 +1419,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1251942309, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
-      propertyPath: m_Name
-      value: LaserCrosshair
-      objectReference: {fileID: 0}
     - target: {fileID: 510612228241140659, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
       propertyPath: shipMovement
       value: 
