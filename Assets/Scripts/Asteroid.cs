@@ -142,6 +142,9 @@ public class Asteroid : MonoBehaviour
     }
 
     private void OnDestroyed()
+    {
+
+    }
     void OnCollisionEnter(Collision collisionInfo)
     {
         if (collisionInfo.collider.tag == "Player")

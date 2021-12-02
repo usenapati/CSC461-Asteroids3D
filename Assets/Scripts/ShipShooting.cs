@@ -39,6 +39,7 @@ public class ShipShooting : MonoBehaviour
     private bool overHeated = false;
 
     private bool firing;
+    private bool isLaser;
 
     private CinemachineVirtualCamera cam;
 
@@ -55,6 +56,8 @@ public class ShipShooting : MonoBehaviour
 
     private void Awake()
     {
+        isLaser = true;
+        fireMode = FireMode.Laser;
         ship = GetComponent<ShipMovement>();
         if (ship.isThirdPerson)
         {
@@ -68,11 +71,11 @@ public class ShipShooting : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (fireMode == FireMode.Laser)
+        if (isLaser || fireMode == FireMode.Laser)
         {
             HandleLaserFiring();
         }
-        if (fireMode == FireMode.Blaster)
+        if (!isLaser || fireMode == FireMode.Blaster)
         {
             HandleBlasterFiring();
         }
@@ -105,7 +108,7 @@ public class ShipShooting : MonoBehaviour
     {
         if (firing && !overHeated)
         {
-            targetInRange = false;
+            //targetInRange = false;
             FireLaser();
         }
         else
@@ -137,7 +140,7 @@ public class ShipShooting : MonoBehaviour
 
         if (TargetInfo.IsTargetInRange(cam.transform.position, cam.transform.forward, out hitInfo, hardpointRange, shootableMask))
         {
-            targetInRange = true;
+            //targetInRange = true;
             if (hitInfo.collider.GetComponentInParent<Asteroid>())
             {
                 ApplyDamage(hitInfo.collider.GetComponentInParent<Asteroid>());
@@ -156,7 +159,7 @@ public class ShipShooting : MonoBehaviour
         }
         else
         {
-            targetInRange = false;
+            //targetInRange = false;
             foreach (var laser in lasers)
             {
                 laser.gameObject.SetActive(true);
@@ -201,6 +204,21 @@ public class ShipShooting : MonoBehaviour
     public void OnFire(InputAction.CallbackContext context)
     {
         firing = context.performed;
+    }
+
+    public void OnSwitchWeapon(InputAction.CallbackContext context)
+    {
+        isLaser = !isLaser;
+        if (isLaser)
+        {
+            Debug.Log("Switching to Laser");
+            fireMode = FireMode.Laser;
+        }
+        else if (!isLaser)
+        {
+            Debug.Log("Switching to Blaster");
+            fireMode = FireMode.Blaster;
+        }
     }
     #endregion
 }

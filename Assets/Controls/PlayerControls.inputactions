@@ -84,6 +84,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "SwitchWeapon",
+                    "type": "PassThrough",
+                    "id": "8f6bde15-a471-4107-85bc-bf73d49b726e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -266,7 +274,7 @@
                 {
                     "name": "negative",
                     "id": "3416dc77-72f9-42f7-b224-0bfcea2d773c",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -277,7 +285,7 @@
                 {
                     "name": "positive",
                     "id": "14c9a1e1-49e8-4f38-9d80-8e4dbfd1dc5e",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -332,7 +340,7 @@
                 {
                     "name": "negative",
                     "id": "96be5e54-3798-4df7-bbdf-e326f2449ee9",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -343,7 +351,7 @@
                 {
                     "name": "positive",
                     "id": "3dcc29ac-949e-4cf1-9b91-128a25437f4a",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -387,7 +395,7 @@
                 {
                     "name": "",
                     "id": "d07f6570-92a8-4fcf-a6e3-b2028c522297",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -453,7 +461,7 @@
                 {
                     "name": "",
                     "id": "d2e335ea-9a35-48e4-85bd-536753a6ebd7",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -480,6 +488,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c5b9e451-29fd-423c-b820-cb6042548d1a",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5abeed1c-6558-40f4-9674-7aa16894eefa",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

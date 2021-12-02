@@ -43731,6 +43731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442edfc8643487b4d9ce0565f9d54bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLives: 5
   tpYawTorque: 200
   tpPitchTorque: 200
   tpRollTorque: 200
@@ -43956,6 +43957,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 68d275f1-807d-4396-9f6d-cfa64584a887
     m_ActionName: Ship Controls/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2564068006024263426}
+        m_TargetAssemblyTypeName: ShipShooting, Assembly-CSharp
+        m_MethodName: OnSwitchWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8f6bde15-a471-4107-85bc-bf73d49b726e
+    m_ActionName: Ship Controls/SwitchWeapon[/Keyboard/tab,/DualShock4GamepadHID/buttonNorth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Ship Controls
