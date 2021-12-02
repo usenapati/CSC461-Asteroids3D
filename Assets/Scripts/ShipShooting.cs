@@ -17,13 +17,13 @@ public class ShipShooting : MonoBehaviour
     private LayerMask shootableMask;
     [SerializeField]
     private float hardpointRange = 100f;
-    private bool targetInRange = false;
+    //private bool targetInRange = false;
 
-    [Header("Laser Settingd")]
+    [Header("Laser Settings")]
     [SerializeField]
     private LineRenderer[] lasers;
     [SerializeField]
-    private ParticleSystem laserHitParticles;
+    private List<ParticleSystem> laserHitParticles;
     [SerializeField]
     private float laserDamage = 2f;
     [SerializeField]
@@ -42,6 +42,17 @@ public class ShipShooting : MonoBehaviour
 
     private CinemachineVirtualCamera cam;
 
+    public enum FireMode { Laser, Blaster };
+    public FireMode fireMode;
+
+    [Header("Blaster Settings")]
+    [SerializeField]
+    private GameObject blasterBolt;
+    [SerializeField]
+    private float blastRate;
+    bool canBlast;
+    float blastTimer;
+
     private void Awake()
     {
         ship = GetComponent<ShipMovement>();
@@ -57,7 +68,37 @@ public class ShipShooting : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HandleLaserFiring();
+        if (fireMode == FireMode.Laser)
+        {
+            HandleLaserFiring();
+        }
+        if (fireMode == FireMode.Blaster)
+        {
+            HandleBlasterFiring();
+        }
+    }
+
+    private void HandleBlasterFiring() 
+    {
+        if (firing && canBlast) {
+            FireBlaster();
+            blastTimer = 0f;
+            canBlast = false;
+        }
+        else
+        {
+            blastTimer += Time.fixedDeltaTime;
+            if (blastTimer > (1f / blastRate)) {
+                canBlast = true;
+            }
+        }
+    }
+
+    private void FireBlaster()
+    {
+        foreach (Transform t in hardPoints) {
+            Instantiate(blasterBolt, t.position, t.rotation);
+        }
     }
 
     private void HandleLaserFiring()
@@ -100,7 +141,9 @@ public class ShipShooting : MonoBehaviour
                 ApplyDamage(hitInfo.collider.GetComponentInParent<Asteroid>());
             }
             
-            Instantiate(laserHitParticles, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            foreach(ParticleSystem p in laserHitParticles) { 
+                Instantiate(p, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            }
 
             foreach(var laser in lasers)
             {

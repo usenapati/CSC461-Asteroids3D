@@ -24,6 +24,6 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("Points: " + points);
+        //Debug.Log("Points: " + points);
     }
 }

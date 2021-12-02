@@ -82,7 +82,7 @@ public class ShipMovement : MonoBehaviour
     [SerializeField]
     TrailRenderer boostTrail;
     [SerializeField]
-    ParticleSystem boostFX;
+    List<ParticleSystem> boostFX;
 
     void Start()
     {
@@ -119,12 +119,18 @@ public class ShipMovement : MonoBehaviour
 
             if (boosting)
             {
-                boostFX.Play();
+                foreach (ParticleSystem p in boostFX)
+                {
+                    p.Play();
+                }
                 boostTrail.emitting = true;
             }
             else
             {
-                boostFX.Stop();
+                foreach (ParticleSystem p in boostFX)
+                {
+                    p.Stop();
+                }
                 boostTrail.emitting = false;
             }
         }
@@ -135,16 +141,6 @@ public class ShipMovement : MonoBehaviour
                 p.Play();
             }
 
-            if (boosting)
-            {
-                boostFX.Play();
-                boostTrail.emitting = true;
-            }
-            else
-            {
-                boostFX.Stop();
-                boostTrail.emitting = false;
-            }
         }
         else
         {
@@ -156,7 +152,10 @@ public class ShipMovement : MonoBehaviour
             {
                 p.Stop();
             }
-            boostFX.Stop();
+            foreach (ParticleSystem p in boostFX)
+            {
+                p.Stop();
+            }
             boostTrail.emitting = false;
         }
 
