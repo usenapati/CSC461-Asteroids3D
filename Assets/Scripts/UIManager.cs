@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -32,13 +33,17 @@ public class UIManager : MonoBehaviour
 
     //Pause: Restart Button
     [SerializeField] private Button pauseRestartButton;
-    //Pause: Exit Button
+    //Pause: Exit Game Button
     [SerializeField] private Button pauseExitButton;
+    //Pause: Exit Mode Button
+    [SerializeField] private Button pauseExitModeButton;
 
     //Game Over: Restart Button
     [SerializeField] private Button gameOverRestartButton;
-    //Game Over: Exit Button
+    //Game Over: Exit Game Button
     [SerializeField] private Button gameOverExitButton;
+    //Game Over: Exit Mode Button
+    [SerializeField] private Button gameOverExitModeButton;
     //Game Over: Scoreboard Text
     [SerializeField] private TextMeshProUGUI gameOverScoreboardText;
 
@@ -46,6 +51,8 @@ public class UIManager : MonoBehaviour
     {
         pauseExitButton.onClick.AddListener(ExitOnClick);
         gameOverExitButton.onClick.AddListener(ExitOnClick);
+        pauseExitModeButton.onClick.AddListener(ExitModeOnClick);
+        gameOverExitModeButton.onClick.AddListener(ExitModeOnClick);
         pauseRestartButton.onClick.AddListener(RestartOnClick);
         gameOverRestartButton.onClick.AddListener(RestartOnClick);
     }
@@ -128,6 +135,11 @@ public class UIManager : MonoBehaviour
 #else
          Application.Quit();
 #endif
+    }
+
+    public void ExitModeOnClick()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void UpdateLives()

@@ -99,20 +99,24 @@ public class GameManager : MonoBehaviour
 
             FindObjectOfType<UIManager>().hideUI();
             FindObjectOfType<UIManager>().showGameOver();
-            FindObjectOfType<ShipMovement>().enabled = false;
-            FindObjectOfType<ShipShooting>().enabled = false;
+            if (FindObjectOfType<ShipMovement>() != null)
+            {
+                FindObjectOfType<ShipMovement>().enabled = false;
+                FindObjectOfType<ShipShooting>().enabled = false;
+            }
             //Debug.Log("GAME OVER");
 
         }
         // If finished the game, display success screen
-        else
+        else if (asteroidSpawner.transform.childCount == 0 && !levelEndless)
         {
             // DisplaySuccess if level is complete
-            if (!levelEndless && points > levelhighScore)
+            if (points > levelhighScore)
             {
                 levelhighScore = points;
                 bestTime = FindObjectOfType<Timer>().PrintCurrentTime();
             }
+            // Transition to Next Level
         }
         // DisplayPoints
         // DisplayHighScore
