@@ -519,6 +519,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &474259851 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5245975907106845218, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
+  m_PrefabInstance: {fileID: 267286068}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 442edfc8643487b4d9ce0565f9d54bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &704401270 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1481a0f5d65d7aa40857291374e764f1, type: 3}
@@ -1408,6 +1419,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1251942309, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
+      propertyPath: m_Name
+      value: LaserCrosshair
+      objectReference: {fileID: 0}
+    - target: {fileID: 510612228241140659, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
+      propertyPath: shipMovement
+      value: 
+      objectReference: {fileID: 474259851}
     - target: {fileID: 510612228241140668, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
       propertyPath: m_RootOrder
       value: 16

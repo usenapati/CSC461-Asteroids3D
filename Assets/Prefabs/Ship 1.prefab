@@ -44041,7 +44041,7 @@ MonoBehaviour:
   currentLaserHeat: 0
   fireMode: 0
   blasterBolt: {fileID: 0}
-  blastRate: 0
+  blastRate: 5
 --- !u!1 &5245975907119384999
 GameObject:
   m_ObjectHideFlags: 0
