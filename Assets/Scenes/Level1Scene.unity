@@ -1062,6 +1062,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2db9f49cdb2dfae40b358e1b0e5c90de, type: 3}
+--- !u!114 &1389131979 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6004440974398168480, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
+  m_PrefabInstance: {fileID: 510612229048600379}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1498535578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1399,7 +1410,7 @@ MonoBehaviour:
   - {fileID: 6695932094592234148, guid: e1c5b653159228b4db1137c5d3e54054, type: 3}
   - {fileID: 3747523078541193112, guid: e3d8945ad429b9741b79f70b91a528d0, type: 3}
   - {fileID: 4968727233037697153, guid: e271107c6ba253b4b9d2db2f542407cf, type: 3}
-  amountAsteroidsToSpwan: 20
+  amountAsteroidsToSpwan: 5
   minRandomSpawn: -250
   maxRandomSpawn: 250
 --- !u!4 &1902192382
@@ -1423,10 +1434,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 727742556, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581835685, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
+      propertyPath: m_Name
+      value: GameOverScoreboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 510612228241140657, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
+      propertyPath: startMinutes
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 510612228241140659, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
       propertyPath: shipMovement
       value: 
       objectReference: {fileID: 474259851}
+    - target: {fileID: 510612228241140659, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
+      propertyPath: winScoreboardText
+      value: 
+      objectReference: {fileID: 1389131979}
     - target: {fileID: 510612228241140668, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -1474,6 +1501,14 @@ PrefabInstance:
     - target: {fileID: 510612228241140670, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020375502184131793, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4213280048733912428, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
+      propertyPath: m_Name
+      value: WinScoreboard
       objectReference: {fileID: 0}
     - target: {fileID: 6654937421249256329, guid: b1a668a1409b539438eb72f2b3732277, type: 3}
       propertyPath: m_LocalScale.x

@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         asteroidSpawner = FindObjectOfType<AsteroidSpawner>();
         FindObjectOfType<UIManager>().hidePaused();
         FindObjectOfType<UIManager>().hideGameOver();
+        FindObjectOfType<UIManager>().hideWin();
         FindObjectOfType<UIManager>().showUI();
         if (levelEndless)
         {
@@ -62,7 +63,8 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!levelEndless && !FindObjectOfType<Timer>().GetTimerActive() || FindObjectOfType<Timer>().GetCurrentTime() <= 0)
+        if (!levelEndless && FindObjectOfType<Timer>().GetCurrentTime() <= 0)
+        //if (!levelEndless && !FindObjectOfType<Timer>().GetTimerActive() || FindObjectOfType<Timer>().GetCurrentTime() <= 0)
         {
             ranOut = true;
         }
@@ -73,10 +75,12 @@ public class GameManager : MonoBehaviour
     // Controls the end game sequence
     void EndGame()
     {
+        //LOSE CONDITION
         // If collided or ran out of time, display game over screen
         if (collided || ranOut)
         {
             endOfGame = true;
+            //Debug.Log("Player has lost level");
             // DisplayGameOver
             if (levelEndless)
             {
@@ -98,6 +102,7 @@ public class GameManager : MonoBehaviour
             }
 
             FindObjectOfType<UIManager>().hideUI();
+            FindObjectOfType<UIManager>().hideWin();
             FindObjectOfType<UIManager>().showGameOver();
             if (FindObjectOfType<ShipMovement>() != null)
             {
@@ -107,14 +112,28 @@ public class GameManager : MonoBehaviour
             //Debug.Log("GAME OVER");
 
         }
+        //WIN CONDITION
         // If finished the game, display success screen
         else if (asteroidSpawner.transform.childCount == 0 && !levelEndless)
         {
+            levelPassed = true;
+            endOfGame = true;
+            //Debug.Log("Player has won level");
+            FindObjectOfType<Timer>().StopTimer();
+            // Add Point bonus to points
             // DisplaySuccess if level is complete
             if (points > levelhighScore)
             {
                 levelhighScore = points;
                 bestTime = FindObjectOfType<Timer>().PrintCurrentTime();
+            }
+            FindObjectOfType<UIManager>().hideUI();
+            FindObjectOfType<UIManager>().hideGameOver();
+            FindObjectOfType<UIManager>().showWin();
+            if (FindObjectOfType<ShipMovement>() != null)
+            {
+                FindObjectOfType<ShipMovement>().enabled = false;
+                FindObjectOfType<ShipShooting>().enabled = false;
             }
             // Transition to Next Level
         }

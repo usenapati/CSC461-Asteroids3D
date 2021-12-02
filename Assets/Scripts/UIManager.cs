@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public GameObject[] pausedObjects;
     public GameObject[] gameOverObjects;
     public GameObject[] playerUIObjects;
+    public GameObject[] winObjects;
 
     [SerializeField] private ShipMovement shipMovement;
     [SerializeField] private ShipShooting shipShooting;
@@ -47,14 +48,29 @@ public class UIManager : MonoBehaviour
     //Game Over: Scoreboard Text
     [SerializeField] private TextMeshProUGUI gameOverScoreboardText;
 
+    //Win: Next Level Button
+    [SerializeField] private Button winNextLevelButton;
+    //Win: Exit Game Button
+    [SerializeField] private Button winExitButton;
+    //Win: Exit Mode Button
+    [SerializeField] private Button winExitModeButton;
+    //Win: Scoreboard Text
+    [SerializeField] private TextMeshProUGUI winScoreboardText;
+
     private void Awake()
     {
         pauseExitButton.onClick.AddListener(ExitOnClick);
         gameOverExitButton.onClick.AddListener(ExitOnClick);
+        winExitButton.onClick.AddListener(ExitOnClick);
+
         pauseExitModeButton.onClick.AddListener(ExitModeOnClick);
         gameOverExitModeButton.onClick.AddListener(ExitModeOnClick);
+        winExitModeButton.onClick.AddListener(ExitModeOnClick);
+
         pauseRestartButton.onClick.AddListener(RestartOnClick);
         gameOverRestartButton.onClick.AddListener(RestartOnClick);
+
+        winNextLevelButton.onClick.AddListener(NextLevelOnClick);
     }
 
     
@@ -118,6 +134,14 @@ public class UIManager : MonoBehaviour
                 "\nCurrent Time: " + FindObjectOfType<Timer>().PrintCurrentTime();
             }
         }
+        if (GameManager.levelPassed)
+        {
+            winScoreboardText.text =
+                "High Score: " + GameManager.levelhighScore +
+                "\nBest Time: " + GameManager.bestTime +
+                "\nCurrent Score: " + GameManager.points +
+                "\nCurrent Time: " + FindObjectOfType<Timer>().PrintCurrentTime();
+        }
     }
 
     private void RestartOnClick()
@@ -140,6 +164,11 @@ public class UIManager : MonoBehaviour
     public void ExitModeOnClick()
     {
         SceneManager.LoadScene(0);
+    }
+
+    private void NextLevelOnClick()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private void UpdateLives()
@@ -237,11 +266,21 @@ public class UIManager : MonoBehaviour
         }
     }
     #endregion
+    #region Win Methods
+    public void showWin()
+    {
+        foreach (var g in winObjects)
+        {
+            g.SetActive(true);
+        }
+    }
 
-    //#region Input
-    //public void OnSwitchWeapon(InputAction.CallbackContext context)
-    //{
-    //    
-    //}
-    //#endregion
+    public void hideWin()
+    {
+        foreach (var g in winObjects)
+        {
+            g.SetActive(false);
+        }
+    }
+    #endregion
 }
