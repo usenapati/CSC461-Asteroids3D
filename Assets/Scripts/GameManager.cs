@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public static bool retrySelected = false;
     public float spawnTime = 20;
     private float currentSpawnTime;
+    private bool earnedTimeBonus = false;
 
 
     private void Awake()
@@ -96,13 +97,21 @@ public class GameManager : MonoBehaviour
             {
                 FindObjectOfType<StopWatch>().StopStopWatch();
                 // Add Point bonus to points
-                points += (int)FindObjectOfType<StopWatch>().GetCurrentTime();
+                if (!earnedTimeBonus)
+                {
+                    points += (int)FindObjectOfType<StopWatch>().GetCurrentTime();
+                    earnedTimeBonus = true;
+                }
             }
             else
             {
                 FindObjectOfType<Timer>().StopTimer();
                 // Add Point bonus to points
-                points += (int)FindObjectOfType<Timer>().GetCurrentTime();
+                if (!earnedTimeBonus)
+                {
+                    points += (int)FindObjectOfType<Timer>().GetCurrentTime();
+                    earnedTimeBonus = true;
+                }
             }
             if (levelEndless && points > endlesshighScore)
             {
@@ -135,7 +144,12 @@ public class GameManager : MonoBehaviour
             //Debug.Log("Player has won level");
             FindObjectOfType<Timer>().StopTimer();
             // Add Point bonus to points
-            points += (int) FindObjectOfType<Timer>().GetCurrentTime();
+            if (!earnedTimeBonus)
+            {
+                points += (int)FindObjectOfType<Timer>().GetCurrentTime();
+                earnedTimeBonus = true;
+            }
+            
             // DisplaySuccess if level is complete
             if (points > levelhighScore)
             {
