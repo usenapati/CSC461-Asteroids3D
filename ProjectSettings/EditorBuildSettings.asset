@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ShaderTest.unity
-    guid: 592d564d446a4084081d4db896fdce2c
+    path: Assets/Scenes/StartMenuScene.unity
+    guid: 325ec7b19952c0d4a821dbca0ad51093
+  - enabled: 1
+    path: Assets/Scenes/EndlessModeScene.unity
+    guid: c378e1f03637f4d46af87a51f2a64e89
+  - enabled: 1
+    path: Assets/Scenes/Level1Scene.unity
+    guid: 6abdd249f4fb00643b62ef67bb110639
   m_configObjects: {}

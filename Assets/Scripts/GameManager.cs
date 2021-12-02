@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        levelEndless = FindObjectOfType<ModeSelecter>().isEndlessMode;
         asteroidSpawner = FindObjectOfType<AsteroidSpawner>();
         FindObjectOfType<UIManager>().hidePaused();
         FindObjectOfType<UIManager>().hideGameOver();
