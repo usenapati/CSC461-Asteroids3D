@@ -44143,7 +44143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5245975907076262241}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.829998, z: -10.57}
+  m_LocalPosition: {x: 0, y: 3.83, z: -10.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5245975908024628560}
@@ -44240,8 +44240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLives: 5
-  tpYawTorque: 150
-  tpPitchTorque: 150
+  tpYawTorque: 175
+  tpPitchTorque: 175
   tpRollTorque: 150
   tpThrust: 150
   tpUpThrust: 75
@@ -49875,7 +49875,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5245975908662555755}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.42100143, z: 1.7900009}
+  m_LocalPosition: {x: 0, y: 0.42099953, z: 1.7900009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5245975908526947976}
