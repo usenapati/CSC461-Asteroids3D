@@ -43735,13 +43735,19 @@ MonoBehaviour:
   upDownGlideReduction: 0.277
   leftRightGlideReduction: 0.277
   isThirdPerson: 1
-  forwardFX: []
-  backFX: []
-  upFX: []
-  downFX: []
-  leftFX: []
-  rightFX: []
-  boostTrail: {fileID: 0}
+  forwardFX:
+  - {fileID: 0}
+  backFX:
+  - {fileID: 0}
+  upFX:
+  - {fileID: 0}
+  downFX:
+  - {fileID: 0}
+  leftFX:
+  - {fileID: 0}
+  rightFX:
+  - {fileID: 0}
+  boostTrail: {fileID: 5245975907310770783}
   boostFX: {fileID: 8380278361833480635}
 --- !u!114 &5245975907106845217
 MonoBehaviour:
@@ -43900,6 +43906,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 25bd265f-b457-428f-86ad-765dcd23027c
     m_ActionName: Ship Controls/Fire[/Mouse/leftButton,/DualShock4GamepadHID/buttonWest]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68d275f1-807d-4396-9f6d-cfa64584a887
+    m_ActionName: Ship Controls/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Ship Controls

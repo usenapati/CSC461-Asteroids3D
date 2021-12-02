@@ -130,6 +130,20 @@ public class Asteroid : MonoBehaviour
         //
     }
 
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.tag == "Player")
+        {
+            Debug.Log("Collided with Player");
+            // Subtract Player's Life
+            //If Game is Over
+            GameManager.collided = true;
+            GameManager.endOfGame = true;
+            FindObjectOfType<ShipMovement>().enabled = false;    
+            FindObjectOfType<ShipShooting>().enabled = false;    
+        }
+    }
+
     private void OnDestroy()
     {
         //Instantiate Destruction Particles

@@ -352,6 +352,15 @@ public class ShipMovement : MonoBehaviour
         
     }
 
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.tag == "Asteroid")
+        {
+            Debug.Log("Collided with Asteroid");
+            //this.enabled = false;
+        }
+    }
+
     #region Input Methods
     public void OnThrust(InputAction.CallbackContext context)
     {
@@ -404,6 +413,15 @@ public class ShipMovement : MonoBehaviour
 
         }
         Debug.Log(thrust1D);
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameManager.gameIsPaused = !GameManager.gameIsPaused;
+        }
+
     }
     #endregion
 }
