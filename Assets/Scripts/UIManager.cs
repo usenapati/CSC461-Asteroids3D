@@ -163,11 +163,21 @@ public class UIManager : MonoBehaviour
 
     public void ExitModeOnClick()
     {
+        GameManager.points = 0;
+        GameManager.endOfGame = false;
+        GameManager.levelPassed = false;
+        GameManager.collided = false;
+        GameManager.ranOut = false;
         SceneManager.LoadScene(0);
     }
 
     private void NextLevelOnClick()
     {
+        GameManager.points = 0;
+        GameManager.endOfGame = false;
+        GameManager.levelPassed = false;
+        GameManager.collided = false;
+        GameManager.ranOut = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
