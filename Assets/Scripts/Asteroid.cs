@@ -147,13 +147,17 @@ public class Asteroid : MonoBehaviour
         {
             Debug.Log("Collided with Player");
             // Subtract Player's Life
-            FindObjectOfType<ShipMovement>().currentLives--;
+            ShipMovement shipMov = FindObjectOfType<ShipMovement>();
+            shipMov.currentLives--;
 
             if (FindObjectOfType<ShipMovement>().currentLives <= 0)
             {
                 //If Game is Over
+                shipMov.OnDestroyed();
                 GameManager.collided = true;
             }
+
+
               
         }
     }

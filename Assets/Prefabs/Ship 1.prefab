@@ -43784,6 +43784,9 @@ MonoBehaviour:
   boostFX:
   - {fileID: 2369509302819394747}
   - {fileID: 5602630717794369778}
+  destructFX:
+  - {fileID: 4989004457031396160, guid: 84673edf24758e64db0d9d006f1181aa, type: 3}
+  - {fileID: 2870776174496232127, guid: 8c060349c43266945b6271759c580897, type: 3}
 --- !u!114 &5245975907106845217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43993,7 +43996,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &9075716479326648188
 BoxCollider:
   m_ObjectHideFlags: 0
