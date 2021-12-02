@@ -13,21 +13,20 @@ public class Points : MonoBehaviour
                 if (!GameManager.endOfGame)
                 {
                     // Decrement timer on every tick
-                    GameManager.timer -= 1;
-                    if (GameManager.timer == 0)
+                    if (FindObjectOfType<Timer>().GetTimerActive())
                     {
                         GameManager.endOfGame = true;
                         GameManager.ranOut = true;
                     }
                     
                     // The following is testing for points
-                    if (GameManager.points == 0)
-                    {
-                        GameManager.points += 100;
-                    } else
-                    {
-                        GameManager.points += 25;
-                    }
+                    //if (GameManager.points == 0)
+                    //{
+                    //    GameManager.points += 100;
+                    //} else
+                    //{
+                    //    GameManager.points += 25;
+                    //}
                     
                     //Debug.Log("High Score: " + Globals.highScore);
                     //Debug.Log("Level: " + Globals.level);
@@ -36,7 +35,7 @@ public class Points : MonoBehaviour
                     if (GameManager.levelPassed)
                     {
                         int levelBonus = GameManager.level * 2500;
-                        int timeBonus = GameManager.timer * 10;            
+                        int timeBonus = (int)FindObjectOfType<Timer>().GetCurrentTime() * 10;            
                         // Display both         
                         GameManager.points += (levelBonus + timeBonus);
                         Debug.Log(timeBonus);
@@ -46,14 +45,14 @@ public class Points : MonoBehaviour
             }
             else
             {        
-                if (GameManager.endOfGame)
-                {
-                    if (GameManager.points > GameManager.highScore)
-                    {
-                        GameManager.highScore = GameManager.points;
-                    }
-                    GameManager.points = 0;
-                }
+                //if (GameManager.endOfGame)
+                //{
+                //    if (GameManager.points > GameManager.highScore)
+                //    {
+                //        GameManager.highScore = GameManager.points;
+                //    }
+                //    GameManager.points = 0;
+                //}
             }
         }
         

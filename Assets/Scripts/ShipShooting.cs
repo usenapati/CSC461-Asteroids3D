@@ -105,6 +105,7 @@ public class ShipShooting : MonoBehaviour
     {
         if (firing && !overHeated)
         {
+            targetInRange = false;
             FireLaser();
         }
         else
@@ -136,6 +137,7 @@ public class ShipShooting : MonoBehaviour
 
         if (TargetInfo.IsTargetInRange(cam.transform.position, cam.transform.forward, out hitInfo, hardpointRange, shootableMask))
         {
+            targetInRange = true;
             if (hitInfo.collider.GetComponentInParent<Asteroid>())
             {
                 ApplyDamage(hitInfo.collider.GetComponentInParent<Asteroid>());
@@ -154,6 +156,7 @@ public class ShipShooting : MonoBehaviour
         }
         else
         {
+            targetInRange = false;
             foreach (var laser in lasers)
             {
                 laser.gameObject.SetActive(true);

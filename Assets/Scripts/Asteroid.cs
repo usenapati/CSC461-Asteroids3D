@@ -142,6 +142,24 @@ public class Asteroid : MonoBehaviour
     }
 
     private void OnDestroyed()
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.tag == "Player")
+        {
+            Debug.Log("Collided with Player");
+            // Subtract Player's Life
+            FindObjectOfType<ShipMovement>().currentLives--;
+
+            if (FindObjectOfType<ShipMovement>().currentLives <= 0)
+            {
+                //If Game is Over
+                GameManager.collided = true;
+            }
+              
+        }
+    }
+
+    private void OnDestroy()
     {
         //Instantiate Destruction Particles
         foreach (ParticleSystem p in breakFX)

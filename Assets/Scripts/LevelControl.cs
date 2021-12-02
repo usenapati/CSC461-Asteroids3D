@@ -86,7 +86,7 @@ public class LevelControl : MonoBehaviour
     {
         // DisplayPoints
         //AsteroidHandler.CreateAsteroids();
-        GameManager.timer = 500;
+        //GameManager.timer = 500;
         GameManager.level += 1;
         GameManager.startReset = false;
         GameManager.levelPassed = false;

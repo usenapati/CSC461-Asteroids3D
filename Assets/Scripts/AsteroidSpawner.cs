@@ -17,7 +17,7 @@ public class AsteroidSpawner : MonoBehaviour
         SpawnAsteroids();
     }
 
-    void SpawnAsteroids()
+    public void SpawnAsteroids()
     {
         for (int i = 0; i < amountAsteroidsToSpwan; i++)
         {

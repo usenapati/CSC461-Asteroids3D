@@ -8,6 +8,10 @@ using Cinemachine;
 [RequireComponent(typeof(Rigidbody))]
 public class ShipMovement : MonoBehaviour
 {
+    [Header("Ship General Setting")]
+    [SerializeField]
+    public int currentLives = 5;
+
     [Header("Ship Third Person Movement Setting")]
     [SerializeField]
     private float tpYawTorque = 500f;
@@ -34,7 +38,7 @@ public class ShipMovement : MonoBehaviour
 
     [Header("Boost Setting")]
     [SerializeField]
-    private float maxBoostAmount = 2f;
+    public float maxBoostAmount = 2f;
     [SerializeField]
     private float boostDegenerationRate = 0.25f;
     [SerializeField]
@@ -99,6 +103,7 @@ public class ShipMovement : MonoBehaviour
         rb.useGravity = false;
         currentBoostAmount = maxBoostAmount;
         boostTrail.emitting = true;
+        currentLives = 5;
     }
 
     void FixedUpdate()
@@ -351,6 +356,15 @@ public class ShipMovement : MonoBehaviour
         
     }
 
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.tag == "Asteroid")
+        {
+            Debug.Log("Collided with Asteroid");
+            //this.enabled = false;
+        }
+    }
+
     #region Input Methods
     public void OnThrust(InputAction.CallbackContext context)
     {
@@ -403,6 +417,15 @@ public class ShipMovement : MonoBehaviour
 
         }
         Debug.Log(thrust1D);
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameManager.gameIsPaused = !GameManager.gameIsPaused;
+        }
+
     }
     #endregion
 }
