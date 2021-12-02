@@ -13,8 +13,7 @@ public class Points : MonoBehaviour
                 if (!GameManager.endOfGame)
                 {
                     // Decrement timer on every tick
-                    GameManager.timer -= 1;
-                    if (GameManager.timer == 0)
+                    if (FindObjectOfType<Timer>().GetTimerActive())
                     {
                         GameManager.endOfGame = true;
                         GameManager.ranOut = true;
@@ -36,7 +35,7 @@ public class Points : MonoBehaviour
                     if (GameManager.levelPassed)
                     {
                         int levelBonus = GameManager.level * 2500;
-                        int timeBonus = GameManager.timer * 10;            
+                        int timeBonus = (int)FindObjectOfType<Timer>().GetCurrentTime() * 10;            
                         // Display both         
                         GameManager.points += (levelBonus + timeBonus);
                         Debug.Log(timeBonus);

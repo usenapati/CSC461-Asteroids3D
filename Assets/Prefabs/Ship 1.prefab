@@ -43736,17 +43736,31 @@ MonoBehaviour:
   leftRightGlideReduction: 0.277
   isThirdPerson: 1
   forwardFX:
-  - {fileID: 0}
+  - {fileID: 7056940585942678901}
+  - {fileID: 5245975907119384665}
+  - {fileID: 3034813725964838763}
+  - {fileID: 8568122488184882420}
   backFX:
-  - {fileID: 0}
+  - {fileID: 5847800626450538027}
+  - {fileID: 3744300807588275548}
+  - {fileID: 4221570469046719784}
+  - {fileID: 6983021260387858640}
   upFX:
-  - {fileID: 0}
+  - {fileID: 444255118076767184}
+  - {fileID: 5977010973736895099}
+  - {fileID: 9187417508520197252}
+  - {fileID: 1862541493212035994}
   downFX:
-  - {fileID: 0}
+  - {fileID: 2692249082976671981}
+  - {fileID: 8229516574697148296}
+  - {fileID: 846916975022190805}
+  - {fileID: 1018792383774100376}
   leftFX:
-  - {fileID: 0}
+  - {fileID: 4493902883404038618}
+  - {fileID: 6170636253834599723}
   rightFX:
-  - {fileID: 0}
+  - {fileID: 6015253794822695826}
+  - {fileID: 8296651500940625190}
   boostTrail: {fileID: 5245975907310770783}
   boostFX: {fileID: 8380278361833480635}
 --- !u!114 &5245975907106845217
@@ -43907,7 +43921,19 @@ MonoBehaviour:
     m_ActionId: 25bd265f-b457-428f-86ad-765dcd23027c
     m_ActionName: Ship Controls/Fire[/Mouse/leftButton,/DualShock4GamepadHID/buttonWest]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5245975907106845218}
+        m_TargetAssemblyTypeName: ShipMovement, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 68d275f1-807d-4396-9f6d-cfa64584a887
     m_ActionName: Ship Controls/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
   m_NeverAutoSwitchControlSchemes: 0
