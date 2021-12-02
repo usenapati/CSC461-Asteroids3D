@@ -37,6 +37,8 @@ public class ShipShooting : MonoBehaviour
     private float laserCoolRate = 0.5f;
     public float currentLaserHeat = 0f;
     private bool overHeated = false;
+    [SerializeField]
+    private AudioSource laserSFX;
 
     private bool firing;
     private bool isLaser;
@@ -53,6 +55,10 @@ public class ShipShooting : MonoBehaviour
     private float blastRate;
     bool canBlast;
     float blastTimer;
+    [SerializeField]
+    private AudioSource blasterSFX;
+
+
 
     private void Awake()
     {
@@ -85,6 +91,10 @@ public class ShipShooting : MonoBehaviour
     {
         if (firing && canBlast) {
             FireBlaster();
+            //if (!blasterSFX.isPlaying)
+            //{
+                blasterSFX.Play();
+            //}
             blastTimer = 0f;
             canBlast = false;
         }
@@ -110,10 +120,18 @@ public class ShipShooting : MonoBehaviour
         {
             //targetInRange = false;
             FireLaser();
+            if (!laserSFX.isPlaying)
+            {
+                laserSFX.Play();
+            }
         }
         else
         {
-            foreach(var laser in lasers)
+            if (laserSFX.isPlaying)
+            {
+                laserSFX.Stop();
+            }
+            foreach (var laser in lasers)
             {
                 laser.gameObject.SetActive(false);
             }
