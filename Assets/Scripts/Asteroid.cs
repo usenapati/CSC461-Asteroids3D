@@ -141,10 +141,6 @@ public class Asteroid : MonoBehaviour
         //
     }
 
-    private void OnDestroyed()
-    {
-
-    }
     void OnCollisionEnter(Collision collisionInfo)
     {
         if (collisionInfo.collider.tag == "Player")
@@ -162,7 +158,7 @@ public class Asteroid : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnDestroyed()
     {
         //Instantiate Destruction Particles
         foreach (ParticleSystem p in breakFX)

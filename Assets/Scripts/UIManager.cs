@@ -209,4 +209,11 @@ public class UIManager : MonoBehaviour
         }
     }
     #endregion
+
+    //#region Input
+    //public void OnSwitchWeapon(InputAction.CallbackContext context)
+    //{
+    //    
+    //}
+    //#endregion
 }
