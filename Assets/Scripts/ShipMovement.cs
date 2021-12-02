@@ -87,6 +87,8 @@ public class ShipMovement : MonoBehaviour
     TrailRenderer boostTrail;
     [SerializeField]
     List<ParticleSystem> boostFX;
+    [SerializeField]
+    List<ParticleSystem> destructFX;
 
     void Start()
     {
@@ -363,6 +365,15 @@ public class ShipMovement : MonoBehaviour
             Debug.Log("Collided with Asteroid");
             //this.enabled = false;
         }
+    }
+
+    public void OnDestroyed() 
+    {
+        foreach (ParticleSystem p in destructFX)
+        {
+            Instantiate(p.gameObject, transform.position, transform.rotation);
+        }
+        Destroy(this.gameObject);
     }
 
     #region Input Methods
