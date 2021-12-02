@@ -66,6 +66,7 @@ MonoBehaviour:
   breakFX:
   - {fileID: 5731535448016399177, guid: 4e33ae77c2267dd4e8904884b22f1ffe, type: 3}
   - {fileID: 8690313661778745817, guid: a345d4559c2b23043855a113df3cd77b, type: 3}
+  breakSFX: {fileID: 1606703853734971228, guid: 61e9e08a8b0cfe4428f5ce7a7f2c2ded, type: 3}
 --- !u!54 &2512607880362327516
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class Asteroid : MonoBehaviour
     public float health;
     public int size;
     public List<ParticleSystem> breakFX;
+    public AudioSource breakSFX;
     private int id;
     
     public Asteroid(int initSize)
@@ -103,6 +104,7 @@ public class Asteroid : MonoBehaviour
     
     void Destroyed()
     {
+
         OnDestroyed();
         // Split each asteroid into two other asteroids if it is big enough
         if (size == 2)
@@ -170,7 +172,8 @@ public class Asteroid : MonoBehaviour
             Instantiate(p.gameObject, transform.position, transform.rotation);
         }
         //Play Explosion SFX
-        //...
+        Instantiate(breakSFX, transform.position, transform.rotation);
+        //breakSFX.Play();
     }
 
 }

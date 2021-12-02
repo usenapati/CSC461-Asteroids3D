@@ -89,6 +89,13 @@ public class ShipMovement : MonoBehaviour
     List<ParticleSystem> boostFX;
     [SerializeField]
     List<ParticleSystem> destructFX;
+    [SerializeField]
+    AudioSource thrusterSFX;
+    bool thrusting = false;
+    bool upDowning = false;
+    bool strafing = false;
+    [SerializeField]
+    AudioSource boostSFX;
 
     void Start()
     {
@@ -118,6 +125,7 @@ public class ShipMovement : MonoBehaviour
     void HandleFX() 
     {
         if (thrust1D > 0) {
+            thrusting = true;
             //forward fx
             foreach (ParticleSystem p in forwardFX)
             {
@@ -126,6 +134,9 @@ public class ShipMovement : MonoBehaviour
 
             if (boosting)
             {
+                if (!boostSFX.isPlaying) { 
+                    boostSFX.Play();
+                }
                 foreach (ParticleSystem p in boostFX)
                 {
                     p.Play();
@@ -134,6 +145,10 @@ public class ShipMovement : MonoBehaviour
             }
             else
             {
+                if (boostSFX.isPlaying)
+                {
+                    boostSFX.Stop();
+                }
                 foreach (ParticleSystem p in boostFX)
                 {
                     p.Stop();
@@ -142,6 +157,7 @@ public class ShipMovement : MonoBehaviour
             }
         }
         else if (thrust1D < 0) {
+            thrusting = true;
             //back fx
             foreach (ParticleSystem p in backFX)
             {
@@ -151,6 +167,8 @@ public class ShipMovement : MonoBehaviour
         }
         else
         {
+            thrusting = false;
+            boostSFX.Stop();
             foreach (ParticleSystem p in forwardFX)
             {
                 p.Stop();
@@ -168,6 +186,7 @@ public class ShipMovement : MonoBehaviour
 
         if (upDown1D > 0)
         {
+            upDowning = true;
             //up fx
             foreach (ParticleSystem p in upFX)
             {
@@ -177,6 +196,7 @@ public class ShipMovement : MonoBehaviour
         }
         else if (upDown1D < 0)
         {
+            upDowning = true;
             //down fx
             foreach (ParticleSystem p in downFX)
             {
@@ -185,6 +205,7 @@ public class ShipMovement : MonoBehaviour
         }
         else
         {
+            upDowning = false;
             foreach (ParticleSystem p in upFX)
             {
                 p.Stop();
@@ -198,6 +219,7 @@ public class ShipMovement : MonoBehaviour
         if (strafe1D > 0)
         {
             //right fx
+            strafing = true;
             foreach (ParticleSystem p in rightFX)
             {
                 p.Play();
@@ -207,12 +229,14 @@ public class ShipMovement : MonoBehaviour
         else if (strafe1D < 0)
         {
             //left fx
+            strafing = true;
             foreach (ParticleSystem p in leftFX)
             {
                 p.Play();
             }
         }
         else {
+            strafing = false;
             foreach (ParticleSystem p in leftFX)
             {
                 p.Stop();
@@ -223,6 +247,16 @@ public class ShipMovement : MonoBehaviour
             }
         }
 
+        if ((thrusting || upDowning || strafing) && !thrusterSFX.isPlaying)
+        {
+            thrusterSFX.Play();
+            //Debug.Log("Yah");
+        }
+        else if (!thrusting && !upDowning && !strafing && thrusterSFX.isPlaying)
+        { 
+            thrusterSFX.Stop();
+            //Debug.Log("Yeety");
+        }
         
     }
 
