@@ -20,13 +20,13 @@ public class Points : MonoBehaviour
                     }
                     
                     // The following is testing for points
-                    if (GameManager.points == 0)
-                    {
-                        GameManager.points += 100;
-                    } else
-                    {
-                        GameManager.points += 25;
-                    }
+                    //if (GameManager.points == 0)
+                    //{
+                    //    GameManager.points += 100;
+                    //} else
+                    //{
+                    //    GameManager.points += 25;
+                    //}
                     
                     //Debug.Log("High Score: " + Globals.highScore);
                     //Debug.Log("Level: " + Globals.level);
@@ -45,14 +45,14 @@ public class Points : MonoBehaviour
             }
             else
             {        
-                if (GameManager.endOfGame)
-                {
-                    if (GameManager.points > GameManager.highScore)
-                    {
-                        GameManager.highScore = GameManager.points;
-                    }
-                    GameManager.points = 0;
-                }
+                //if (GameManager.endOfGame)
+                //{
+                //    if (GameManager.points > GameManager.highScore)
+                //    {
+                //        GameManager.highScore = GameManager.points;
+                //    }
+                //    GameManager.points = 0;
+                //}
             }
         }
         

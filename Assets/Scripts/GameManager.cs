@@ -44,7 +44,19 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         PauseGame();
-        Restart();
+        if (retrySelected)
+        {
+            Debug.Log("Pressed Restart");
+            Invoke("Restart", 0.5f);
+            if (gameIsPaused)
+            {
+                gameIsPaused = false;
+                FindObjectOfType<UIManager>().hidePaused();
+                FindObjectOfType<UIManager>().showUI();
+                Time.timeScale = 1f;
+            }
+            
+        }
     }
 
     private void FixedUpdate()
@@ -110,38 +122,30 @@ public class GameManager : MonoBehaviour
 
     void Restart()
     {
-
-        if (retrySelected)
+        foreach (Transform child in asteroidSpawner.transform)
         {
-            foreach (Transform child in asteroidSpawner.transform)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
-            asteroidSpawner.SpawnAsteroids();
-            if (levelEndless)
-            {
-                FindObjectOfType<StopWatch>().ResetStopWatch();
-                FindObjectOfType<StopWatch>().StartStopWatch();
-            }
-            else
-            {
-                FindObjectOfType<Timer>().ResetTimer();
-                FindObjectOfType<Timer>().StartTimer();
-                level = 0;
-            }
-            points = 0;
-            endOfGame = false;
-            levelPassed = false;
-            collided = false;
-            ranOut = false;
-            retrySelected = false;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
+            GameObject.Destroy(child.gameObject);
+        }
+        asteroidSpawner.SpawnAsteroids();
+        if (levelEndless)
+        {
+            FindObjectOfType<StopWatch>().ResetStopWatch();
+            FindObjectOfType<StopWatch>().StartStopWatch();
         }
         else
         {
-            //onMenu = true;
+            FindObjectOfType<Timer>().ResetTimer();
+            FindObjectOfType<Timer>().StartTimer();
+            level = 0;
         }
+        points = 0;
+        endOfGame = false;
+        levelPassed = false;
+        collided = false;
+        ranOut = false;
+        retrySelected = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 
     void PauseGame()

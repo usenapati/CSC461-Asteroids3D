@@ -57,7 +57,14 @@ public class UIManager : MonoBehaviour
         if (shipMovement != null)
         {
             currentScoreText.text = "Score: " + GameManager.points;
-            highScoreText.text = "High Score: " + GameManager.highScore;
+            if (GameManager.levelEndless)
+            {
+                highScoreText.text = "High Score: " + GameManager.endlesshighScore;
+            }
+            else
+            {
+                highScoreText.text = "High Score: " + GameManager.levelhighScore;
+            }
             if (GameManager.levelEndless)
             {
                 timerText.text = FindObjectOfType<StopWatch>().PrintCurrentTime();
@@ -74,7 +81,7 @@ public class UIManager : MonoBehaviour
             if (GameManager.levelEndless)
             {
                 gameOverScoreboardText.text =
-                "High Score: " + GameManager.highScore +
+                "High Score: " + GameManager.endlesshighScore +
                 "\nBest Time: " + GameManager.bestTime +
                 "\nCurrent Score: " + GameManager.points +
                 "\nCurrent Time: " + FindObjectOfType<StopWatch>().PrintCurrentTime();
@@ -82,7 +89,7 @@ public class UIManager : MonoBehaviour
             else
             {
                 gameOverScoreboardText.text =
-                "High Score: " + GameManager.highScore +
+                "High Score: " + GameManager.levelhighScore +
                 "\nBest Time: " + GameManager.bestTime +
                 "\nCurrent Score: " + GameManager.points +
                 "\nCurrent Time: " + FindObjectOfType<Timer>().PrintCurrentTime();
