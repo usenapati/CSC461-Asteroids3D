@@ -8,6 +8,10 @@ using Cinemachine;
 [RequireComponent(typeof(Rigidbody))]
 public class ShipMovement : MonoBehaviour
 {
+    [Header("Ship General Setting")]
+    [SerializeField]
+    public int currentLives = 5;
+
     [Header("Ship Third Person Movement Setting")]
     [SerializeField]
     private float tpYawTorque = 500f;
@@ -34,7 +38,7 @@ public class ShipMovement : MonoBehaviour
 
     [Header("Boost Setting")]
     [SerializeField]
-    private float maxBoostAmount = 2f;
+    public float maxBoostAmount = 2f;
     [SerializeField]
     private float boostDegenerationRate = 0.25f;
     [SerializeField]
@@ -82,7 +86,16 @@ public class ShipMovement : MonoBehaviour
     [SerializeField]
     TrailRenderer boostTrail;
     [SerializeField]
-    ParticleSystem boostFX;
+    List<ParticleSystem> boostFX;
+    [SerializeField]
+    List<ParticleSystem> destructFX;
+    [SerializeField]
+    AudioSource thrusterSFX;
+    bool thrusting = false;
+    bool upDowning = false;
+    bool strafing = false;
+    [SerializeField]
+    AudioSource boostSFX;
 
     void Start()
     {
@@ -99,6 +112,7 @@ public class ShipMovement : MonoBehaviour
         rb.useGravity = false;
         currentBoostAmount = maxBoostAmount;
         boostTrail.emitting = true;
+        currentLives = 5;
     }
 
     void FixedUpdate()
@@ -111,6 +125,7 @@ public class ShipMovement : MonoBehaviour
     void HandleFX() 
     {
         if (thrust1D > 0) {
+            thrusting = true;
             //forward fx
             foreach (ParticleSystem p in forwardFX)
             {
@@ -119,35 +134,41 @@ public class ShipMovement : MonoBehaviour
 
             if (boosting)
             {
-                boostFX.Play();
+                if (!boostSFX.isPlaying) { 
+                    boostSFX.Play();
+                }
+                foreach (ParticleSystem p in boostFX)
+                {
+                    p.Play();
+                }
                 boostTrail.emitting = true;
             }
             else
             {
-                boostFX.Stop();
+                if (boostSFX.isPlaying)
+                {
+                    boostSFX.Stop();
+                }
+                foreach (ParticleSystem p in boostFX)
+                {
+                    p.Stop();
+                }
                 boostTrail.emitting = false;
             }
         }
         else if (thrust1D < 0) {
+            thrusting = true;
             //back fx
             foreach (ParticleSystem p in backFX)
             {
                 p.Play();
             }
 
-            if (boosting)
-            {
-                boostFX.Play();
-                boostTrail.emitting = true;
-            }
-            else
-            {
-                boostFX.Stop();
-                boostTrail.emitting = false;
-            }
         }
         else
         {
+            thrusting = false;
+            boostSFX.Stop();
             foreach (ParticleSystem p in forwardFX)
             {
                 p.Stop();
@@ -156,12 +177,16 @@ public class ShipMovement : MonoBehaviour
             {
                 p.Stop();
             }
-            boostFX.Stop();
+            foreach (ParticleSystem p in boostFX)
+            {
+                p.Stop();
+            }
             boostTrail.emitting = false;
         }
 
         if (upDown1D > 0)
         {
+            upDowning = true;
             //up fx
             foreach (ParticleSystem p in upFX)
             {
@@ -171,6 +196,7 @@ public class ShipMovement : MonoBehaviour
         }
         else if (upDown1D < 0)
         {
+            upDowning = true;
             //down fx
             foreach (ParticleSystem p in downFX)
             {
@@ -179,6 +205,7 @@ public class ShipMovement : MonoBehaviour
         }
         else
         {
+            upDowning = false;
             foreach (ParticleSystem p in upFX)
             {
                 p.Stop();
@@ -192,6 +219,7 @@ public class ShipMovement : MonoBehaviour
         if (strafe1D > 0)
         {
             //right fx
+            strafing = true;
             foreach (ParticleSystem p in rightFX)
             {
                 p.Play();
@@ -201,12 +229,14 @@ public class ShipMovement : MonoBehaviour
         else if (strafe1D < 0)
         {
             //left fx
+            strafing = true;
             foreach (ParticleSystem p in leftFX)
             {
                 p.Play();
             }
         }
         else {
+            strafing = false;
             foreach (ParticleSystem p in leftFX)
             {
                 p.Stop();
@@ -217,6 +247,16 @@ public class ShipMovement : MonoBehaviour
             }
         }
 
+        if ((thrusting || upDowning || strafing) && !thrusterSFX.isPlaying)
+        {
+            thrusterSFX.Play();
+            //Debug.Log("Yah");
+        }
+        else if (!thrusting && !upDowning && !strafing && thrusterSFX.isPlaying)
+        { 
+            thrusterSFX.Stop();
+            //Debug.Log("Yeety");
+        }
         
     }
 
@@ -352,6 +392,24 @@ public class ShipMovement : MonoBehaviour
         
     }
 
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.tag == "Asteroid")
+        {
+            Debug.Log("Collided with Asteroid");
+            //this.enabled = false;
+        }
+    }
+
+    public void OnDestroyed() 
+    {
+        foreach (ParticleSystem p in destructFX)
+        {
+            Instantiate(p.gameObject, transform.position, transform.rotation);
+        }
+        Destroy(this.gameObject);
+    }
+
     #region Input Methods
     public void OnThrust(InputAction.CallbackContext context)
     {
@@ -404,6 +462,15 @@ public class ShipMovement : MonoBehaviour
 
         }
         Debug.Log(thrust1D);
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GameManager.gameIsPaused = !GameManager.gameIsPaused;
+        }
+
     }
     #endregion
 }
