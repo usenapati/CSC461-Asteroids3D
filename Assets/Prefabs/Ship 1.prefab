@@ -4925,6 +4925,15 @@ LineRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.99999994
+        value: 0
+        inSlope: -0.5644135
+        outSlope: -0.5644135
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.16677685
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -43552,6 +43561,15 @@ LineRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -0.6401909
+        outSlope: -0.6401909
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.18379498
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -43762,7 +43780,9 @@ MonoBehaviour:
   - {fileID: 6015253794822695826}
   - {fileID: 8296651500940625190}
   boostTrail: {fileID: 5245975907310770783}
-  boostFX: {fileID: 8380278361833480635}
+  boostFX:
+  - {fileID: 2369509302819394747}
+  - {fileID: 5602630717794369778}
 --- !u!114 &5245975907106845217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43993,13 +44013,18 @@ MonoBehaviour:
   lasers:
   - {fileID: 5515601454476275233}
   - {fileID: 4139497819563374075}
-  laserHitParticles: {fileID: 4042844302436106901, guid: 9990f1f2c5ee7014c97688329cd6b5d9, type: 3}
+  laserHitParticles:
+  - {fileID: 166685803555200519, guid: 9990f1f2c5ee7014c97688329cd6b5d9, type: 3}
+  - {fileID: 8128203163292808552, guid: a55c8f31d8f2a7547abca5c7190df126, type: 3}
   laserDamage: 2
   timeBetweenDamage: 0.25
-  laserHeatThreshold: 2
+  laserHeatThreshold: 20
   laserHeatRate: 0.25
   laserCoolRate: 0.5
   currentLaserHeat: 0
+  fireMode: 0
+  blasterBolt: {fileID: 0}
+  blastRate: 0
 --- !u!1 &5245975907119384999
 GameObject:
   m_ObjectHideFlags: 0
@@ -48829,7 +48854,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5245975907310770781}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.3600006, z: -1.1399994}
+  m_LocalPosition: {x: 0, y: -0.165, z: -1.012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3815634306072890569}
@@ -48924,7 +48949,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 0}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -48941,7 +48966,7 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
+      atime1: 6554
       atime2: 0
       atime3: 0
       atime4: 0
@@ -97704,19 +97729,52 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4033108465779358136, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033108465779358136, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033108465779358136, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4088227449447632293, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
       propertyPath: m_Name
       value: BoostFX
       objectReference: {fileID: 0}
+    - target: {fileID: 4504394942241563037, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
+      propertyPath: VelocityModule.orbitalZ.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4504394942241563037, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
+      propertyPath: VelocityModule.orbitalOffsetX.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4504394942241563037, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
+      propertyPath: VelocityModule.orbitalOffsetY.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025932341221012948, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
+      propertyPath: VelocityModule.orbitalOffsetY.scalar
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
+--- !u!198 &2369509302819394747 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6025932341221012948, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
+  m_PrefabInstance: {fileID: 8305299213022699887}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &5602630717794369778 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4504394942241563037, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
+  m_PrefabInstance: {fileID: 8305299213022699887}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6839320998822368536 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3290019817769268343, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
-  m_PrefabInstance: {fileID: 8305299213022699887}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8380278361833480635 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 508593832925233364, guid: 39181f65d79df5b4fa19fd8b16bfffd7, type: 3}
   m_PrefabInstance: {fileID: 8305299213022699887}
   m_PrefabAsset: {fileID: 0}

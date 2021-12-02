@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -10,6 +12,7 @@ public class Asteroid : MonoBehaviour
 
     public float health;
     public int size;
+    public List<ParticleSystem> breakFX;
     private int id;
     
     public Asteroid(int initSize)
@@ -59,9 +62,12 @@ public class Asteroid : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
-        rb.isKinematic = true;
-        rb.AddForce(Vector3.forward * initialForce);
-        rb.AddTorque(Vector3.forward * initialTorque);
+        //rb.isKinematic = true;
+
+        int startDir = UnityEngine.Random.Range(0, 5);
+        Vector3[] directions = { Vector3.forward, Vector3.right, Vector3.up, Vector3.down, Vector3.left, Vector3.back }; 
+        rb.AddForce(directions[startDir] * initialForce);
+        rb.AddTorque(directions[startDir] * initialTorque);
     }
 
     // Update is called once per frame
@@ -97,11 +103,13 @@ public class Asteroid : MonoBehaviour
     
     void Destroyed()
     {
+        OnDestroyed();
         // Split each asteroid into two other asteroids if it is big enough
         if (size == 2)
         {
             GameManager.points += 500;
             GameManager.asteroidSpawner.SpawnAsteroid(this.transform.position, 1);
+            
             Destroy(this.gameObject);
             //GameManager.asteroidArray[id] = new Asteroid(1);
             //GameManager.asteroidArray[GameManager.currentID] = new Asteroid(1);
@@ -110,6 +118,7 @@ public class Asteroid : MonoBehaviour
         {
             GameManager.points += 250;
             GameManager.asteroidSpawner.SpawnAsteroid(this.transform.position, 0);
+            //OnDestroyed();
             Destroy(this.gameObject);
             //GameManager.asteroidArray[id] = new Asteroid(0);
             //GameManager.asteroidArray[GameManager.currentID] = new Asteroid(0);
@@ -117,9 +126,11 @@ public class Asteroid : MonoBehaviour
         else
         {
             GameManager.points += 100;
+            //OnDestroyed();
             Destroy(this.gameObject);
             //GameManager.asteroidArray[id] = null;
         }
+        //OnDestroyed();
     }
     
     void CollisionChecker()
@@ -130,6 +141,7 @@ public class Asteroid : MonoBehaviour
         //
     }
 
+    private void OnDestroyed()
     void OnCollisionEnter(Collision collisionInfo)
     {
         if (collisionInfo.collider.tag == "Player")
@@ -150,7 +162,12 @@ public class Asteroid : MonoBehaviour
     private void OnDestroy()
     {
         //Instantiate Destruction Particles
+        foreach (ParticleSystem p in breakFX)
+        {
+            Instantiate(p.gameObject, transform.position, transform.rotation);
+        }
         //Play Explosion SFX
+        //...
     }
 
 }
