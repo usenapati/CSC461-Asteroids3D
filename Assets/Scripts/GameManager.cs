@@ -44,8 +44,7 @@ public class GameManager : MonoBehaviour
         {
             FindObjectOfType<Timer>().StartTimer();
         }
-
-
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -91,6 +90,7 @@ public class GameManager : MonoBehaviour
         // If collided or ran out of time, display game over screen
         if (collided || ranOut)
         {
+            Cursor.lockState = CursorLockMode.Confined;
             endOfGame = true;
             //Debug.Log("Player has lost level");
             // DisplayGameOver
@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
         // If finished the game, display success screen
         else if (asteroidSpawner.transform.childCount == 0 && !levelEndless)
         {
+            Cursor.lockState = CursorLockMode.Confined;
             levelPassed = true;
             endOfGame = true;
             FindObjectOfType<ShipShooting>().firing = false;
@@ -212,6 +213,7 @@ public class GameManager : MonoBehaviour
             FindObjectOfType<UIManager>().showPaused();
             FindObjectOfType<UIManager>().hideUI();
             Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.Confined;
             // Pause Audio
         }
         else if (!gameIsPaused && !endOfGame)
@@ -221,6 +223,7 @@ public class GameManager : MonoBehaviour
             FindObjectOfType<UIManager>().hidePaused();
             FindObjectOfType<UIManager>().showUI();
             Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;
             // Unpause Audio
         }
     }

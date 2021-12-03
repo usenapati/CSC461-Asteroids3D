@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd16cce2355eef46a1b216ab307ebc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialForce: 1000
-  initialTorque: 1000
+  initialForce: 5000
+  initialTorque: 5000
   health: 1
   size: 0
   breakFX:

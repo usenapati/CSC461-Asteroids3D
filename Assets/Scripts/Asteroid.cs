@@ -65,7 +65,7 @@ public class Asteroid : MonoBehaviour
         rb.useGravity = false;
         //rb.isKinematic = true;
 
-        int startDir = UnityEngine.Random.Range(0, 5);
+        int startDir = Random.Range(0, 5);
         Vector3[] directions = { Vector3.forward, Vector3.right, Vector3.up, Vector3.down, Vector3.left, Vector3.back }; 
         rb.AddForce(directions[startDir] * initialForce);
         rb.AddTorque(directions[startDir] * initialTorque);
