@@ -7,7 +7,7 @@ public class AsteroidSpawner : MonoBehaviour
 {
     public GameObject[] asteroidObjects;
 
-    public int amountAsteroidsToSpwan;
+    public int amountAsteroidsToSpawn;
 
     public float minRandomSpawn = -500;
     public float maxRandomSpawn = 500;
@@ -19,12 +19,12 @@ public class AsteroidSpawner : MonoBehaviour
 
     public void SpawnAsteroids()
     {
-        for (int i = 0; i < amountAsteroidsToSpwan; i++)
+        for (int i = 0; i < amountAsteroidsToSpawn; i++)
         {
             float randomX = UnityEngine.Random.Range(minRandomSpawn, maxRandomSpawn);
             float randomY = UnityEngine.Random.Range(minRandomSpawn, maxRandomSpawn);
             float randomZ = UnityEngine.Random.Range(minRandomSpawn, maxRandomSpawn);
-            int randomAsteroidShape = UnityEngine.Random.Range(0, 3);
+            int randomAsteroidShape = UnityEngine.Random.Range(0, 6);
             Vector3 randomSpawnPoint = new Vector3(transform.position.x + randomX, transform.position.y + randomY, transform.position.z + randomZ);
 
             GameObject tempObj = Instantiate(asteroidObjects[randomAsteroidShape], randomSpawnPoint, Quaternion.identity);

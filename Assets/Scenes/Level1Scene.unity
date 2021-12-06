@@ -1475,9 +1475,9 @@ MonoBehaviour:
   - {fileID: 6695932094592234148, guid: e1c5b653159228b4db1137c5d3e54054, type: 3}
   - {fileID: 3747523078541193112, guid: e3d8945ad429b9741b79f70b91a528d0, type: 3}
   - {fileID: 4968727233037697153, guid: e271107c6ba253b4b9d2db2f542407cf, type: 3}
-  amountAsteroidsToSpwan: 3
-  minRandomSpawn: -250
-  maxRandomSpawn: 250
+  amountAsteroidsToSpawn: 3
+  minRandomSpawn: -50
+  maxRandomSpawn: 50
 --- !u!4 &1902192382
 Transform:
   m_ObjectHideFlags: 0
@@ -1599,6 +1599,18 @@ PrefabInstance:
     - target: {fileID: 7914323391502267378, guid: 519e927c76940c04584c2707f17e53b6, type: 3}
       propertyPath: m_RootOrder
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914323391502267378, guid: 519e927c76940c04584c2707f17e53b6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.333
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914323391502267378, guid: 519e927c76940c04584c2707f17e53b6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.333
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914323391502267378, guid: 519e927c76940c04584c2707f17e53b6, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.333
       objectReference: {fileID: 0}
     - target: {fileID: 7914323391502267378, guid: 519e927c76940c04584c2707f17e53b6, type: 3}
       propertyPath: m_LocalPosition.x

@@ -96,6 +96,8 @@ public class ShipMovement : MonoBehaviour
     bool strafing = false;
     [SerializeField]
     AudioSource boostSFX;
+    [SerializeField]
+    AudioSource bumpSFX;
 
     void Start()
     {
@@ -392,13 +394,16 @@ public class ShipMovement : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collisionInfo)
+    void OnCollisionEnter(Collision collision)
     {
-        if (collisionInfo.collider.tag == "Asteroid")
+    
+        if (collision.collider.gameObject.CompareTag("Asteroid"))
         {
             Debug.Log("Collided with Asteroid");
             //this.enabled = false;
+            bumpSFX.Play();
         }
+        
     }
 
     public void OnDestroyed() 

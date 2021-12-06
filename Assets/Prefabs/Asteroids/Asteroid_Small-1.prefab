@@ -82,7 +82,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1001 &3001586290323099740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,6 +145,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2db9f49cdb2dfae40b358e1b0e5c90de, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2db9f49cdb2dfae40b358e1b0e5c90de, type: 3}
+      propertyPath: m_TagString
+      value: Asteroid
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2db9f49cdb2dfae40b358e1b0e5c90de, type: 3}

@@ -65,10 +65,15 @@ public class Asteroid : MonoBehaviour
         rb.useGravity = false;
         //rb.isKinematic = true;
 
-        int startDir = Random.Range(0, 5);
-        Vector3[] directions = { Vector3.forward, Vector3.right, Vector3.up, Vector3.down, Vector3.left, Vector3.back }; 
-        rb.AddForce(directions[startDir] * initialForce);
-        rb.AddTorque(directions[startDir] * initialTorque);
+        int startDirA = Random.Range(0, 5);
+        int startDirB = Random.Range(0, 5);
+        float modA = Random.Range(0.5f, 1);
+        float modB = Random.Range(0.5f, 1);
+        Vector3[] directions = { Vector3.forward, Vector3.right, Vector3.up, Vector3.down, Vector3.left, Vector3.back };
+        Vector3 newDir = ((modA * directions[startDirA]) + (modB * directions[startDirB])).normalized;
+
+        rb.AddForce(newDir * Random.Range(initialForce / 2f, initialForce));
+        rb.AddTorque(directions[startDirA] * Random.Range(initialTorque / 2f, initialTorque));
     }
 
     // Update is called once per frame
