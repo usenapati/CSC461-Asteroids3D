@@ -367,18 +367,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hardpoints
       objectReference: {fileID: 0}
-    - target: {fileID: 2564068006024263426, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
-      propertyPath: fireMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2564068006024263426, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
-      propertyPath: blastRate
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2564068006024263426, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
-      propertyPath: blasterBolt
-      value: 
-      objectReference: {fileID: 5346939210349603817, guid: e7035e0ba48989347bf9d0cc24d31a79, type: 3}
     - target: {fileID: 5245975907076262243, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
       propertyPath: m_LocalPosition.y
       value: 3.83
@@ -386,14 +374,6 @@ PrefabInstance:
     - target: {fileID: 5245975907076262243, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
       propertyPath: m_LocalPosition.z
       value: -10.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 5245975907106845218, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
-      propertyPath: tpYawTorque
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 5245975907106845218, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
-      propertyPath: tpPitchTorque
-      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 5245975907106845219, guid: 01e56857b339aac49bd606728f8943f9, type: 3}
       propertyPath: m_RootOrder
